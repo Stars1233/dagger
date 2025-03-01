@@ -53,11 +53,11 @@ java_library(
         "AggregatedEarlyEntryPointMetadata.java",
     ],
     deps = [
+        "//dagger-spi",
         "//java/dagger/hilt/processor/internal:aggregated_elements",
         "//java/dagger/hilt/processor/internal:classnames",
         "//java/dagger/hilt/processor/internal:processors",
         "//java/dagger/hilt/processor/internal/root/ir",
-        "//java/dagger/internal/codegen/extension",
         "//java/dagger/internal/codegen/xprocessing",
         "//third_party/java/auto:value",
         "//third_party/java/guava/collect",

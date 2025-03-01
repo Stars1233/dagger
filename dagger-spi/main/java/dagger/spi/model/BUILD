@@ -17,16 +17,10 @@
 
 load("@io_bazel_rules_kotlin//kotlin:jvm.bzl", "kt_jvm_library")
 
-package(default_visibility = [
-    # The dagger/spi should be the only direct dependent on this target.
-    # If you need to depend on :model, depend on dagger/spi instead so
-    # that pom files correctly pick up the spi maven dependency.
-    # TODO(bcorso): Consider if :model should have its own maven coordinates.
-    "//java/dagger/spi:__pkg__",
-])
+package(default_visibility = ["//dagger-spi:internal"])
 
 filegroup(
-    name = "model-srcs",
+    name = "srcs",
     srcs = glob([
         "*.java",
         "*.kt",
@@ -35,11 +29,11 @@ filegroup(
 
 kt_jvm_library(
     name = "model",
-    srcs = [":model-srcs"],
+    srcs = [":srcs"],
     # TODO(bcorso): Add javacopts explicitly once kt_jvm_library supports them.
     deps = [
         "//dagger-runtime/main/java/dagger:core",
-        "//java/dagger/internal/codegen/extension",
+        "//dagger-spi/main/java/dagger/internal/codegen/extension",
         "//third_party/java/auto:common",
         "//third_party/java/auto:value",
         "//third_party/java/error_prone:annotations",

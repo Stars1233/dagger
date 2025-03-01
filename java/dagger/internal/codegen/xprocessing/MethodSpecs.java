@@ -28,6 +28,7 @@ import androidx.room.compiler.processing.XMethodType;
 import androidx.room.compiler.processing.XType;
 import com.squareup.javapoet.AnnotationSpec;
 import com.squareup.javapoet.MethodSpec;
+import com.squareup.javapoet.TypeName;
 
 // TODO(bcorso): Consider moving these methods into XProcessing library.
 /** A utility class for {@link MethodSpec} helper methods. */
@@ -37,6 +38,9 @@ public final class MethodSpecs {
   public static MethodSpec.Builder overriding(XMethodElement method, XType owner) {
     XMethodType methodType = method.asMemberOf(owner);
     Nullability nullability = Nullability.of(method);
+    TypeName returnType =
+        Nullability.getTypeNameWithNullableAnnotations(methodType.getReturnType());
+
     MethodSpec.Builder builder =
         // We're overriding the method so we have to use the jvm name here.
         MethodSpec.methodBuilder(method.getJvmName())
@@ -49,16 +53,7 @@ public final class MethodSpecs {
                     .collect(toImmutableList()))
             .addTypeVariables(methodType.getTypeVariableNames())
             .varargs(method.isVarArgs())
-            .returns(
-                methodType
-                    .getReturnType()
-                    .getTypeName()
-                    .annotated(
-                        nullability.typeUseNullableAnnotations().stream()
-                            .map(XConverters::toJavaPoet)
-                            .map(AnnotationSpec::builder)
-                            .map(AnnotationSpec.Builder::build)
-                            .collect(toImmutableList())));
+            .returns(returnType);
     if (method.isPublic()) {
       builder.addModifiers(PUBLIC);
     } else if (method.isProtected()) {

@@ -62,7 +62,7 @@ kt_jvm_library(
         "ViewModelValidationPlugin.kt",
     ],
     deps = [
-        "//:spi",
+        "//dagger-spi",
         "//java/dagger/hilt/android/processor/internal:android_classnames",
         "//java/dagger/hilt/processor/internal:dagger_models",
         "//java/dagger/internal/codegen/xprocessing",

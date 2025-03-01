@@ -34,9 +34,9 @@ kt_compiler_test(
         "//java/dagger/internal/codegen/langmodel",
         "//java/dagger/internal/codegen/validation",
         "//java/dagger/internal/codegen/writing",
-        "//java/dagger/model/testing",
+        "//dagger-testing/main/java/dagger/model/testing",
         "//java/dagger/producers",
-        "//java/dagger/spi",
+        "//dagger-spi",
     ],
     deps = [
         "//java/dagger/internal/codegen:package_info",
@@ -62,9 +62,9 @@ kt_compiler_test(
         "//java/dagger/internal/codegen/langmodel",
         "//java/dagger/internal/codegen/validation",
         "//java/dagger/internal/codegen/writing",
-        "//java/dagger/model/testing",
+        "//dagger-testing/main/java/dagger/model/testing",
         "//java/dagger/producers",
-        "//java/dagger/spi",
+        "//dagger-spi",
     ],
     deps = [
         "//java/dagger/internal/codegen/xprocessing:xprocessing-testing",

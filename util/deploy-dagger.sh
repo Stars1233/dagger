@@ -69,10 +69,10 @@ _deploy \
 
 _deploy \
   "com.google.auto.common,dagger.spi.internal.shaded.auto.common;androidx.room.compiler,dagger.spi.internal.shaded.androidx.room.compiler;kotlin.metadata,dagger.spi.internal.shaded.kotlin.metadata;androidx.room,dagger.spi.internal.shaded.androidx.room" \
-  java/dagger/spi/artifact.jar \
-  java/dagger/spi/pom.xml \
-  java/dagger/spi/artifact-src.jar \
-  java/dagger/spi/artifact-javadoc.jar \
+  dagger-spi/artifact.jar \
+  dagger-spi/pom.xml \
+  dagger-spi/artifact-src.jar \
+  dagger-spi/artifact-javadoc.jar \
   ""
 
 _deploy \
@@ -109,10 +109,10 @@ _deploy \
 
 _deploy \
   "com.google.auto.common,dagger.spi.internal.shaded.auto.common;androidx.room.compiler,dagger.spi.internal.shaded.androidx.room.compiler;kotlin.metadata,dagger.spi.internal.shaded.kotlin.metadata;androidx.room,dagger.spi.internal.shaded.androidx.room" \
-  java/dagger/android/processor/artifact.jar \
-  java/dagger/android/processor/pom.xml \
-  java/dagger/android/processor/artifact-src.jar \
-  java/dagger/android/processor/artifact-javadoc.jar \
+  dagger-android-processor/artifact.jar \
+  dagger-android-processor/pom.xml \
+  dagger-android-processor/artifact-src.jar \
+  dagger-android-processor/artifact-javadoc.jar \
   ""
 
 _deploy \

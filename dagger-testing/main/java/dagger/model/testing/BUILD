@@ -1,4 +1,4 @@
-# Copyright (C) 2021 The Dagger Authors.
+# Copyright (C) 2018 The Dagger Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -30,9 +30,10 @@ java_library(
     srcs = glob(["*.java"]),
     javacopts = DOCLINT_HTML_AND_SYNTAX + DOCLINT_REFERENCES,
     deps = [
-        "//java/dagger/internal/codegen/extension",
-        "//java/dagger/spi",
+        "//dagger-spi",
+        "//third_party/java/auto:value",
         "//third_party/java/checker_framework_annotations",
+        "//third_party/java/guava/base",
         "//third_party/java/guava/collect",
         "//third_party/java/truth",
     ],

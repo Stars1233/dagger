@@ -26,6 +26,7 @@ java_library(
         "HiltCompilerTests.java",
     ],
     deps = [
+        "//dagger-spi",
         "//java/dagger/hilt/android/processor/internal/androidentrypoint:processor_lib",
         "//java/dagger/hilt/android/processor/internal/customtestapplication:processor_lib",
         "//java/dagger/hilt/processor/internal:base_processor",
@@ -40,7 +41,6 @@ java_library(
         "//java/dagger/hilt/processor/internal/root:root_processor_lib",
         "//java/dagger/hilt/processor/internal/uninstallmodules:processor_lib",
         "//java/dagger/internal/codegen:processor",
-        "//java/dagger/internal/codegen/extension",
         "//java/dagger/internal/codegen/xprocessing",
         "//java/dagger/internal/codegen/xprocessing:xprocessing-testing",
         "//java/dagger/testing/compile",

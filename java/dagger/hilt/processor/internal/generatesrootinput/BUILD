@@ -55,10 +55,10 @@ java_library(
         "GeneratesRootInputs.java",
     ],
     deps = [
+        "//dagger-spi",
         "//java/dagger/hilt/processor/internal:classnames",
         "//java/dagger/hilt/processor/internal:processor_errors",
         "//java/dagger/hilt/processor/internal:processors",
-        "//java/dagger/internal/codegen/extension",
         "//java/dagger/internal/codegen/xprocessing",
         "//third_party/java/guava/base",
         "//third_party/java/guava/collect",

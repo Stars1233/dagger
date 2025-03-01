@@ -16,51 +16,50 @@
 #   The Service Provider Interface for Dagger's binding graph model
 
 load("@rules_java//java:defs.bzl", "java_library")
-load(
-    "//:build_defs.bzl",
-    "DOCLINT_HTML_AND_SYNTAX",
-    "DOCLINT_REFERENCES",
-    "POM_VERSION",
-)
+load("//:build_defs.bzl", "POM_VERSION")
 load("//tools/maven:maven.bzl", "gen_maven_artifact")
 
 package(default_visibility = ["//:src"])
 
-filegroup(
-    name = "spi-srcs",
-    srcs = glob(["*.java"]) + [
-        "//java/dagger/model:model-srcs",
-        "//java/dagger/spi/model:model-srcs",
+package_group(
+    name = "internal",
+    packages = [
+        "//dagger-spi/...",
     ],
 )
 
+ARTIFACT_COORDINATES = "com.google.dagger:dagger-spi:" + POM_VERSION
+
+ARTIFACT_LIBS = [
+    "//dagger-spi/main/java/dagger/internal/codegen/extension",
+    "//dagger-spi/main/java/dagger/model",
+    "//dagger-spi/main/java/dagger/spi",
+    "//dagger-spi/main/java/dagger/spi/model",
+]
+
+filegroup(
+    name = "srcs",
+    srcs = [
+        "//dagger-spi/main/java/dagger/model:srcs",
+        "//dagger-spi/main/java/dagger/spi:srcs",
+        "//dagger-spi/main/java/dagger/spi/model:srcs",
+    ],
+)
+
+# Other artifacts should only depend on this target to ensure that their POM file includes the
+# dagger-spi dependency which is found via the maven_coordinates tag.
 java_library(
-    name = "spi",
-    srcs = glob(["*.java"]),
-    javacopts = DOCLINT_HTML_AND_SYNTAX + DOCLINT_REFERENCES,
-    tags = ["maven_coordinates=com.google.dagger:dagger-spi:" + POM_VERSION],
-    exports = [
-        "//java/dagger/model",
-        "//java/dagger/spi/model",
-    ],
-    deps = [
-        "//dagger-runtime/main/java/dagger:core",
-        "//java/dagger/model",
-        "//third_party/java/auto:value",
-        "//third_party/java/error_prone:annotations",
-    ],
+    name = "dagger-spi",
+    tags = ["maven_coordinates=" + ARTIFACT_COORDINATES],
+    exports = ARTIFACT_LIBS,
 )
 
 gen_maven_artifact(
     name = "artifact",
-    artifact_coordinates = "com.google.dagger:dagger-spi:" + POM_VERSION,
+    artifact_coordinates = ARTIFACT_COORDINATES,
     artifact_name = "Dagger SPI",
-    artifact_target = ":spi",
-    artifact_target_libs = [
-        "//java/dagger/internal/codegen/extension",
-        "//java/dagger/model",
-        "//java/dagger/spi/model",
-    ],
+    artifact_target = ":dagger-spi",
+    artifact_target_libs = ARTIFACT_LIBS,
     artifact_target_maven_deps = [
         "com.google.code.findbugs:jsr305",
         "com.google.dagger:dagger",
@@ -74,7 +73,7 @@ gen_maven_artifact(
         "dagger.model",
         "dagger.spi",
     ],
-    javadoc_srcs = [":spi-srcs"],
+    javadoc_srcs = [":srcs"],
     # The shaded deps are added using jarjar, but they won't be shaded until later
     # due to: https://github.com/google/dagger/issues/2765. For the shaded rules see
     # util/deploy-dagger.sh

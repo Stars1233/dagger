@@ -25,7 +25,7 @@ java_library(
     plugins = ["//java/dagger/internal/codegen/bootstrap"],
     deps = [
         "//dagger-runtime/main/java/dagger:core",
-        "//java/dagger/internal/codegen/extension",
+        "//dagger-spi",
         "//java/dagger/internal/codegen/xprocessing",
         "//third_party/java/auto:common",
         "//third_party/java/auto:value",

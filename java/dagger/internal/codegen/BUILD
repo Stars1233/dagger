@@ -37,6 +37,7 @@ java_library(
     deps = [
         ":package_info",
         "//dagger-runtime/main/java/dagger:core",
+        "//dagger-spi",
         "//java/dagger/internal/codegen/base",
         "//java/dagger/internal/codegen/binding",
         "//java/dagger/internal/codegen/bindinggraphvalidation",
@@ -47,7 +48,6 @@ java_library(
         "//java/dagger/internal/codegen/validation",
         "//java/dagger/internal/codegen/writing",
         "//java/dagger/internal/codegen/xprocessing",
-        "//java/dagger/spi",
         "//third_party/java/auto:service",
         "//third_party/java/error_prone:annotations",
         "//third_party/java/google_java_format",

@@ -29,7 +29,7 @@ java_library(
     ],
     javacopts = DOCLINT_HTML_AND_SYNTAX + DOCLINT_REFERENCES,
     deps = [
-        "//java/dagger/android/processor:base_processing_step",
+        "//dagger-android-processor:base_processing_step",
         "//java/dagger/internal/codegen/xprocessing",
         "//third_party/java/auto:service",
         "//third_party/java/guava/collect",

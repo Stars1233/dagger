@@ -29,8 +29,8 @@ compat_kt_jvm_library(
     tags = ["maven:merged"],
     deps = [
         "//dagger-runtime/main/java/dagger:core",
+        "//dagger-spi",
         "//java/dagger/internal/codegen/base:shared",
-        "//java/dagger/internal/codegen/extension",
         "//java/dagger/internal/codegen/javapoet",
         "//java/dagger/internal/codegen/xprocessing",
         "//third_party/java/auto:value",

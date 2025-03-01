@@ -18,11 +18,13 @@ package dagger.internal.codegen.xprocessing;
 
 import static androidx.room.compiler.processing.XElementKt.isMethod;
 import static androidx.room.compiler.processing.XElementKt.isVariableElement;
+import static dagger.internal.codegen.extension.DaggerStreams.toImmutableList;
 import static dagger.internal.codegen.extension.DaggerStreams.toImmutableSet;
 import static dagger.internal.codegen.xprocessing.XElements.asMethod;
 import static dagger.internal.codegen.xprocessing.XElements.asVariable;
 
 import androidx.room.compiler.codegen.XClassName;
+import androidx.room.compiler.codegen.compat.XConverters;
 import androidx.room.compiler.processing.XAnnotated;
 import androidx.room.compiler.processing.XElement;
 import androidx.room.compiler.processing.XNullability;
@@ -30,6 +32,9 @@ import androidx.room.compiler.processing.XType;
 import com.google.auto.value.AutoValue;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
+import com.squareup.javapoet.AnnotationSpec;
+import com.squareup.javapoet.ParameterizedTypeName;
+import com.squareup.javapoet.TypeName;
 import java.util.Optional;
 
 /**
@@ -68,6 +73,31 @@ public abstract class Nullability {
         // defaults to using them in the way before Dagger supported type use annotations.
         Sets.difference(typeUseNullableAnnotations, nonTypeUseNullableAnnotations).immutableCopy(),
         isKotlinTypeNullable);
+  }
+
+  static TypeName getTypeNameWithNullableAnnotations(XType type) {
+    TypeName typeName = getAnnotatedTypeName(type, type.getTypeName());
+    return typeName;
+  }
+
+  private static TypeName getAnnotatedTypeName(XType type, TypeName typeName) {
+    ImmutableSet<XClassName> nullableAnnotations = getNullableAnnotations(type);
+    if (typeName instanceof ParameterizedTypeName) {
+      ParameterizedTypeName parameterizedTypeName = (ParameterizedTypeName) typeName;
+      TypeName[] typeArguments = new TypeName[parameterizedTypeName.typeArguments.size()];
+      for (int i = 0; i < parameterizedTypeName.typeArguments.size(); i++) {
+        typeArguments[i] =
+            getAnnotatedTypeName(
+                type.getTypeArguments().get(i), parameterizedTypeName.typeArguments.get(i));
+      }
+      typeName = ParameterizedTypeName.get(parameterizedTypeName.rawType, typeArguments);
+    }
+    return typeName.annotated(
+        nullableAnnotations.stream()
+            .map(XConverters::toJavaPoet)
+            .map(AnnotationSpec::builder)
+            .map(AnnotationSpec.Builder::build)
+            .collect(toImmutableList()));
   }
 
   private static ImmutableSet<XClassName> getNullableAnnotations(XAnnotated annotated) {

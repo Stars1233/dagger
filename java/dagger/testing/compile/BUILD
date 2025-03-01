@@ -30,11 +30,10 @@ java_library(
         "//java/dagger/internal/codegen/xprocessing:xprocessing-testing",
     ],
     deps = [
+        "//dagger-spi",
         "//java/dagger/internal/codegen:processor",
-        "//java/dagger/internal/codegen/extension",
         "//java/dagger/internal/codegen/xprocessing",
         "//java/dagger/internal/codegen/xprocessing:xprocessing-testing",
-        "//java/dagger/spi",
         "//third_party/java/auto:value",
         "//third_party/java/compile_testing",
         "//third_party/java/guava/base",

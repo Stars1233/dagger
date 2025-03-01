@@ -26,7 +26,7 @@ java_library(
     tags = ["maven:merged"],
     deps = [
         "//dagger-runtime/main/java/dagger:core",
-        "//java/dagger/internal/codegen/extension",
+        "//dagger-spi",
         "//java/dagger/internal/codegen/javapoet",
         "//java/dagger/internal/codegen/langmodel",
         "//java/dagger/internal/codegen/xprocessing",

@@ -1,4 +1,4 @@
-# Copyright (C) 2019 The Dagger Authors.
+# Copyright (C) 2018 The Dagger Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,21 +13,30 @@
 # limitations under the License.
 
 # Description:
-#   Extra features for the JDK and Guava. This code is merged into both
-#   the dagger-compiler and dagger-spi artifacts that are sent to Maven
+#   The Service Provider Interface for Dagger's binding graph model
 
 load("@rules_java//java:defs.bzl", "java_library")
+load(
+    "//:build_defs.bzl",
+    "DOCLINT_HTML_AND_SYNTAX",
+    "DOCLINT_REFERENCES",
+)
 
-package(default_visibility = ["//:src"])
+package(default_visibility = ["//dagger-spi:internal"])
+
+filegroup(
+    name = "srcs",
+    srcs = glob(["*.java"]),
+)
 
 java_library(
-    name = "extension",
-    srcs = glob(["*.java"]),
-    tags = ["maven:merged"],
+    name = "spi",
+    srcs = [":srcs"],
+    javacopts = DOCLINT_HTML_AND_SYNTAX + DOCLINT_REFERENCES,
     deps = [
-        "//third_party/java/guava/base",
-        "//third_party/java/guava/collect",
-        "//third_party/java/guava/graph",
-        "//third_party/java/jsr305_annotations",
+        "//dagger-runtime/main/java/dagger:core",
+        "//dagger-spi/main/java/dagger/model",
+        "//third_party/java/auto:value",
+        "//third_party/java/error_prone:annotations",
     ],
 )

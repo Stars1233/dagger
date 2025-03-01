@@ -29,11 +29,11 @@ compiler_test(
         "@maven//:androidx_annotation_annotation_jvm",
     ],
     deps = [
+        "//dagger-spi",
         "//java/dagger/hilt:generates_root_input",
         "//java/dagger/hilt/android/testing/compile",
         "//java/dagger/hilt/processor/internal:base_processor",
         "//java/dagger/hilt/processor/internal/generatesrootinput:generates_root_inputs",
-        "//java/dagger/internal/codegen/extension",
         "//java/dagger/internal/codegen/xprocessing",
         "//java/dagger/internal/codegen/xprocessing:xprocessing-testing",
         "//third_party/java/javapoet",

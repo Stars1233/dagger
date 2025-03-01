@@ -46,11 +46,6 @@ java_library(
 )
 
 java_library(
-    name = "spi",
-    exports = ["//java/dagger/spi"],
-)
-
-java_library(
     name = "compiler_internals",
     exports = [
         "//java/dagger/internal/codegen:processor",
@@ -63,7 +58,7 @@ java_library(
 
 android_library(
     name = "android",
-    exported_plugins = ["//java/dagger/android/processor:plugin"],
+    exported_plugins = ["//dagger-android-processor:plugin"],
     exports = ["//java/dagger/android"],
 )
 
@@ -109,13 +104,13 @@ javadoc_library(
     testonly = 1,
     srcs = [
         "//dagger-runtime/main/java/dagger:javadoc-srcs",
+        "//dagger-spi:srcs",
         "//java/dagger/android:android-srcs",
         "//java/dagger/android/support:support-srcs",
         "//java/dagger/grpc/server:javadoc-srcs",
         "//java/dagger/grpc/server/processor:javadoc-srcs",
         "//java/dagger/hilt:javadoc-srcs",
         "//java/dagger/producers:producers-srcs",
-        "//java/dagger/spi:spi-srcs",
     ],
     android_api_level = 34,
     # TODO(ronshapiro): figure out how to specify the version number for release builds
@@ -130,6 +125,7 @@ javadoc_library(
     root_packages = ["dagger"],
     deps = [
         "//dagger-runtime/main/java/dagger:core",
+        "//dagger-spi",
         "//java/dagger/android",
         "//java/dagger/android/support",
         "//java/dagger/grpc/server",
@@ -137,6 +133,5 @@ javadoc_library(
         "//java/dagger/hilt/android:artifact-lib",
         "//java/dagger/hilt/android/testing:artifact-lib",
         "//java/dagger/producers",
-        "//java/dagger/spi",
     ],
 )

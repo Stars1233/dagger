@@ -22,9 +22,10 @@ load(
     "DOCLINT_REFERENCES",
     "POM_VERSION",
 )
-load("//tools/maven:maven.bzl", "gen_maven_artifact")
 
-package(default_visibility = ["//:src"])
+package(default_visibility = [
+    "//dagger-android-processor:internal",
+])
 
 filegroup(
     name = "srcs",
@@ -35,7 +36,7 @@ java_library(
     name = "base_processing_step",
     srcs = ["BaseProcessingStep.java"],
     deps = [
-        "//java/dagger/internal/codegen/extension",
+        "//dagger-spi",
         "//java/dagger/internal/codegen/xprocessing",
         "//third_party/java/guava/base",
         "//third_party/java/guava/collect",
@@ -54,8 +55,8 @@ java_library(
     deps = [
         ":base_processing_step",
         "//dagger-runtime/main/java/dagger:core",
+        "//dagger-spi",
         "//java/dagger/internal/codegen/xprocessing",
-        "//java/dagger/spi",
         "//third_party/java/auto:service",
         "//third_party/java/auto:value",
         "//third_party/java/guava/base",
@@ -64,34 +65,6 @@ java_library(
         "//third_party/java/javapoet",
         "@maven//:com_google_devtools_ksp_symbol_processing_api",
     ],
-)
-
-gen_maven_artifact(
-    name = "artifact",
-    artifact_coordinates = "com.google.dagger:dagger-android-processor:" + POM_VERSION,
-    artifact_name = "Dagger Android Processor",
-    artifact_target = ":processor",
-    artifact_target_libs = [
-        "//java/dagger/internal/codegen/xprocessing",
-        "//java/dagger/android/processor:base_processing_step",
-    ],
-    artifact_target_maven_deps = [
-        "com.google.dagger:dagger",
-        "com.google.devtools.ksp:symbol-processing-api",
-        "com.google.guava:guava",
-        "com.squareup:javapoet",
-        "com.google.code.findbugs:jsr305",
-        "com.google.dagger:dagger-spi",
-        "com.google.guava:failureaccess",
-        "com.squareup:kotlinpoet",
-        "com.squareup:kotlinpoet-javapoet",
-        "net.ltgt.gradle.incap:incap",
-        "org.jetbrains.kotlin:kotlin-stdlib",
-    ],
-    javadoc_root_packages = [
-        "dagger.android.processor",
-    ],
-    javadoc_srcs = [":srcs"],
 )
 
 java_plugin(
