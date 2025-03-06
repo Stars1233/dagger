@@ -19,15 +19,6 @@ load("@rules_java//java:defs.bzl", "java_library", "java_plugin")
 
 package(default_visibility = ["//:src"])
 
-# TODO(bcorso): Remove all AggregatedDeps usage from the processor class path.
-java_library(
-    name = "annotation",
-    srcs = ["AggregatedDeps.java"],
-    exports = [
-        "//java/dagger/hilt/codegen:originating_element",
-    ],
-)
-
 java_plugin(
     name = "plugin",
     generates_api = 1,
@@ -47,14 +38,14 @@ java_library(
     ],
     deps = [
         ":pkg_private_metadata",
+        "//dagger-compiler/main/java/dagger/internal/codegen/xprocessing",
+        "//dagger-spi",
         "//java/dagger/hilt/processor/internal:base_processor",
         "//java/dagger/hilt/processor/internal:classnames",
         "//java/dagger/hilt/processor/internal:compiler_options",
         "//java/dagger/hilt/processor/internal:components",
         "//java/dagger/hilt/processor/internal:processor_errors",
         "//java/dagger/hilt/processor/internal:processors",
-        "//java/dagger/internal/codegen/extension",
-        "//java/dagger/internal/codegen/xprocessing",
         "//third_party/java/auto:service",
         "//third_party/java/guava/collect",
         "//third_party/java/incap",
@@ -67,9 +58,9 @@ java_library(
     name = "pkg_private_metadata",
     srcs = ["PkgPrivateMetadata.java"],
     deps = [
+        "//dagger-compiler/main/java/dagger/internal/codegen/xprocessing",
         "//java/dagger/hilt/processor/internal:classnames",
         "//java/dagger/hilt/processor/internal:processors",
-        "//java/dagger/internal/codegen/xprocessing",
         "//third_party/java/auto:value",
         "//third_party/java/javapoet",
         "@maven//:com_google_devtools_ksp_symbol_processing_api",
@@ -84,6 +75,8 @@ java_library(
     ],
     deps = [
         ":pkg_private_metadata",
+        "//dagger-compiler/main/java/dagger/internal/codegen/xprocessing",
+        "//dagger-spi",
         "//java/dagger/hilt/processor/internal:aggregated_elements",
         "//java/dagger/hilt/processor/internal:classnames",
         "//java/dagger/hilt/processor/internal:component_descriptor",
@@ -91,8 +84,6 @@ java_library(
         "//java/dagger/hilt/processor/internal/earlyentrypoint:aggregated_early_entry_point_metadata",
         "//java/dagger/hilt/processor/internal/root/ir",
         "//java/dagger/hilt/processor/internal/uninstallmodules:aggregated_uninstall_modules_metadata",
-        "//java/dagger/internal/codegen/extension",
-        "//java/dagger/internal/codegen/xprocessing",
         "//third_party/java/auto:value",
         "//third_party/java/guava/base",
         "//third_party/java/guava/collect",

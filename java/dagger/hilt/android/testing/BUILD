@@ -29,13 +29,13 @@ android_library(
         "//java/dagger/hilt/android/processor/internal/customtestapplication:processor",
     ],
     exports = [
+        "//hilt-core/main/java/dagger/hilt/internal:component_manager",
         "//java/dagger/hilt/android/internal/testing:test_application_component_manager",
         "//java/dagger/hilt/android/internal/testing:test_application_component_manager_holder",
-        "//java/dagger/hilt/internal:component_manager",
     ],
     deps = [
         ":package_info",
-        "//java/dagger/hilt:generates_root_input",
+        "//hilt-core/main/java/dagger/hilt:generates_root_input",
     ],
 )
 
@@ -55,7 +55,12 @@ android_library(
         ":on_component_ready_runner",
         ":package_info",
         "//:dagger_with_compiler",
-        "//java/dagger/hilt:install_in",
+        "//hilt-core/main/java/dagger/hilt:install_in",
+        "//hilt-core/main/java/dagger/hilt/internal:component_manager",
+        "//hilt-core/main/java/dagger/hilt/internal:generated_component",
+        "//hilt-core/main/java/dagger/hilt/internal:preconditions",
+        "//hilt-core/main/java/dagger/hilt/internal:test_singleton_component",
+        "//hilt-core/main/java/dagger/hilt/migration:disable_install_in_check",
         "//java/dagger/hilt/android/components",
         "//java/dagger/hilt/android/internal",
         "//java/dagger/hilt/android/internal/builders",
@@ -70,22 +75,17 @@ android_library(
         "//java/dagger/hilt/android/internal/testing/root:default",
         "//java/dagger/hilt/android/scopes",
         "//java/dagger/hilt/internal:component_entry_point",
-        "//java/dagger/hilt/internal:component_manager",
-        "//java/dagger/hilt/internal:generated_component",
         "//java/dagger/hilt/internal:generated_entry_point",
-        "//java/dagger/hilt/internal:preconditions",
-        "//java/dagger/hilt/internal:test_singleton_component",
         "//java/dagger/hilt/internal/aggregatedroot",
         "//java/dagger/hilt/internal/componenttreedeps",
         "//java/dagger/hilt/internal/processedrootsentinel",
-        "//java/dagger/hilt/migration:disable_install_in_check",
         "@maven//:androidx_annotation_annotation",
         "@maven//:androidx_annotation_annotation_jvm",
         "@maven//:androidx_multidex_multidex",
         "@maven//:androidx_test_core",
     ],
     deps = [
-        "//java/dagger/hilt:generates_root_input",
+        "//hilt-core/main/java/dagger/hilt:generates_root_input",
     ],
 )
 
@@ -95,8 +95,8 @@ android_library(
     srcs = ["HiltAndroidRule.java"],
     deps = [
         ":package_info",
+        "//hilt-core/main/java/dagger/hilt/internal:preconditions",
         "//java/dagger/hilt/android/internal/testing:mark_that_rules_ran_rule",
-        "//java/dagger/hilt/internal:preconditions",
         "@maven//:junit_junit",
     ],
 )
@@ -110,9 +110,9 @@ android_library(
     deps = [
         ":on_component_ready_runner",
         ":package_info",
+        "//hilt-core/main/java/dagger/hilt/internal:component_manager",
         "//java/dagger/hilt/android/internal/testing:test_application_component_manager",
         "//java/dagger/hilt/android/internal/testing:test_application_component_manager_holder",
-        "//java/dagger/hilt/internal:component_manager",
         "@maven//:androidx_multidex_multidex",
     ],
 )
@@ -124,11 +124,11 @@ android_library(
     deps = [
         ":package_info",
         "//:dagger_with_compiler",
-        "//java/dagger/hilt:entry_point",
+        "//hilt-core/main/java/dagger/hilt:entry_point",
+        "//hilt-core/main/java/dagger/hilt/internal:component_manager",
+        "//hilt-core/main/java/dagger/hilt/internal:preconditions",
         "//java/dagger/hilt/android/internal",
         "//java/dagger/hilt/android/internal/testing:test_application_component_manager_holder",
-        "//java/dagger/hilt/internal:component_manager",
-        "//java/dagger/hilt/internal:preconditions",
         "//third_party/java/auto:value",
     ],
 )
@@ -145,7 +145,7 @@ android_library(
     ],
     deps = [
         ":package_info",
-        "//java/dagger/hilt:generates_root_input",
+        "//hilt-core/main/java/dagger/hilt:generates_root_input",
     ],
 )
 
@@ -162,12 +162,12 @@ android_library(
         "//java/dagger/hilt/android/processor/internal/bindvalue:bind_value_processor",
     ],
     exports = [
-        "//java/dagger/hilt:install_in",
+        "//hilt-core/main/java/dagger/hilt:install_in",
         "//java/dagger/hilt/android/qualifiers",
     ],
     deps = [
         ":package_info",
-        "//java/dagger/hilt:generates_root_input",
+        "//hilt-core/main/java/dagger/hilt:generates_root_input",
     ],
 )
 

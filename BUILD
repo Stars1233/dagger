@@ -33,7 +33,7 @@ define_kt_toolchain(
 
 java_library(
     name = "dagger_with_compiler",
-    exported_plugins = ["//java/dagger/internal/codegen:component-codegen"],
+    exported_plugins = ["//dagger-compiler/main/java/dagger/internal/codegen:component-codegen"],
     exports = ["//dagger-runtime/main/java/dagger:core"],
 )
 
@@ -41,37 +41,32 @@ java_library(
     name = "producers_with_compiler",
     exports = [
         ":dagger_with_compiler",
-        "//java/dagger/producers",
+        "//dagger-producers/main/java/dagger/producers",
     ],
-)
-
-java_library(
-    name = "spi",
-    exports = ["//java/dagger/spi"],
 )
 
 java_library(
     name = "compiler_internals",
     exports = [
-        "//java/dagger/internal/codegen:processor",
-        "//java/dagger/internal/codegen/base",
-        "//java/dagger/internal/codegen/binding",
-        "//java/dagger/internal/codegen/validation",
-        "//java/dagger/internal/codegen/writing",
+        "//dagger-compiler/main/java/dagger/internal/codegen:processor",
+        "//dagger-compiler/main/java/dagger/internal/codegen/base",
+        "//dagger-compiler/main/java/dagger/internal/codegen/binding",
+        "//dagger-compiler/main/java/dagger/internal/codegen/validation",
+        "//dagger-compiler/main/java/dagger/internal/codegen/writing",
     ],
 )
 
 android_library(
     name = "android",
-    exported_plugins = ["//java/dagger/android/processor:plugin"],
-    exports = ["//java/dagger/android"],
+    exported_plugins = ["//dagger-android-processor:plugin"],
+    exports = ["//dagger-android/main/java/dagger/android"],
 )
 
 android_library(
     name = "android-support",
     exports = [
         ":android",
-        "//java/dagger/android/support",
+        "//dagger-android-support/main/java/dagger/android/support",
     ],
 )
 
@@ -108,14 +103,15 @@ javadoc_library(
     name = "user-docs",
     testonly = 1,
     srcs = [
+        "//dagger-android-support/main/java/dagger/android/support:support-srcs",
+        "//dagger-android/main/java/dagger/android:android-srcs",
+        "//dagger-producers/main/java/dagger/producers:producers-srcs",
         "//dagger-runtime/main/java/dagger:javadoc-srcs",
-        "//java/dagger/android:android-srcs",
-        "//java/dagger/android/support:support-srcs",
+        "//dagger-spi:srcs",
+        "//hilt-core:javadoc-srcs",
         "//java/dagger/grpc/server:javadoc-srcs",
         "//java/dagger/grpc/server/processor:javadoc-srcs",
         "//java/dagger/hilt:javadoc-srcs",
-        "//java/dagger/producers:producers-srcs",
-        "//java/dagger/spi:spi-srcs",
     ],
     android_api_level = 34,
     # TODO(ronshapiro): figure out how to specify the version number for release builds
@@ -129,14 +125,14 @@ javadoc_library(
     ],
     root_packages = ["dagger"],
     deps = [
+        "//dagger-android-support/main/java/dagger/android/support",
+        "//dagger-android/main/java/dagger/android",
+        "//dagger-producers/main/java/dagger/producers",
         "//dagger-runtime/main/java/dagger:core",
-        "//java/dagger/android",
-        "//java/dagger/android/support",
+        "//dagger-spi",
         "//java/dagger/grpc/server",
         "//java/dagger/grpc/server/processor",
         "//java/dagger/hilt/android:artifact-lib",
         "//java/dagger/hilt/android/testing:artifact-lib",
-        "//java/dagger/producers",
-        "//java/dagger/spi",
     ],
 )

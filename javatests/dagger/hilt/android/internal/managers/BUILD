@@ -28,7 +28,7 @@ android_local_test(
     deps = [
         "//:android_local_test_exports",
         "//:dagger_with_compiler",
-        "//java/dagger/hilt:install_in",
+        "//hilt-core/main/java/dagger/hilt:install_in",
         "//java/dagger/hilt/android:android_entry_point",
         "//java/dagger/hilt/android/lifecycle:hilt_view_model",
         "//java/dagger/hilt/android/testing:hilt_android_test",

@@ -27,9 +27,9 @@ GenJavaTests(
     javacopts = DOCLINT_HTML_AND_SYNTAX,
     deps = [
         "//:dagger_with_compiler",
-        "//java/dagger/android",
-        "//java/dagger/android/processor",
-        "//java/dagger/internal/codegen:processor",
+        "//dagger-android-processor/main/java/dagger/android/processor",
+        "//dagger-android/main/java/dagger/android",
+        "//dagger-compiler/main/java/dagger/internal/codegen:processor",
         "//java/dagger/testing/compile",
         "//third_party/java/compile_testing",
         "//third_party/java/guava/base",

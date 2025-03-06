@@ -23,14 +23,14 @@ compiler_test(
     name = "OriginatingElementProcessorTest",
     srcs = ["OriginatingElementProcessorTest.java"],
     compiler_deps = [
-        "//java/dagger/hilt/codegen:originating_element",
+        "//hilt-core/main/java/dagger/hilt/codegen:originating_element",
         "@androidsdk//:platforms/android-34/android.jar",
         "@maven//:androidx_annotation_annotation",
         "@maven//:androidx_annotation_annotation_jvm",
     ],
     deps = [
+        "//dagger-compiler/main/java/dagger/internal/codegen/xprocessing:xprocessing-testing",
         "//java/dagger/hilt/android/testing/compile",
-        "//java/dagger/internal/codegen/xprocessing:xprocessing-testing",
         "//third_party/java/compile_testing",
         "//third_party/java/junit",
         "//third_party/java/truth",

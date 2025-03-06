@@ -18,7 +18,6 @@ package dagger.internal.codegen;
 
 import static com.google.common.truth.Truth.assertAbout;
 
-import androidx.room.compiler.processing.util.CompilationResultSubject;
 import androidx.room.compiler.processing.util.Source;
 import com.google.common.collect.ImmutableList;
 import com.google.common.truth.FailureMetadata;
@@ -27,12 +26,10 @@ import com.google.common.truth.Truth;
 import dagger.Module;
 import dagger.producers.ProducerModule;
 import dagger.testing.compile.CompilerTests;
-import dagger.testing.compile.CompilerTests.DaggerCompiler;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.Consumer;
 
 /** A {@link Truth} subject for testing Dagger module methods. */
 final class DaggerModuleMethodSubject extends Subject {
@@ -135,35 +132,21 @@ final class DaggerModuleMethodSubject extends Subject {
     return this;
   }
 
-  // Remove this once we've fixed issues with KSP2.
-  void legacyHasError(String errorSubstring) {
-    hasError(errorSubstring, /* useKsp1= */ true);
-  }
-
-  void hasError(String errorSubstring) {
-    hasError(errorSubstring, /* useKsp1= */ false);
-  }
-
   /**
    * Fails if compiling the module with the method doesn't report an error at the method
    * declaration whose message contains {@code errorSubstring}.
    */
-  private void hasError(String errorSubstring, boolean useKsp1) {
+  void hasError(String errorSubstring) {
     String source = moduleSource();
     Source module = CompilerTests.javaSource("test.TestModule", source);
-    DaggerCompiler compiler = CompilerTests.daggerCompiler(
-        ImmutableList.<Source>builder().add(module).addAll(additionalSources).build());
-    Consumer<CompilationResultSubject> onCompilationResult =
-        subject ->
-            subject
-                .hasErrorContaining(errorSubstring)
-                .onSource(module)
-                .onLine(methodLine(source));
-    if (useKsp1) {
-      compiler.legacyCompile(onCompilationResult);
-    } else {
-      compiler.compile(onCompilationResult);
-    }
+    CompilerTests.daggerCompiler(
+            ImmutableList.<Source>builder().add(module).addAll(additionalSources).build())
+        .compile(
+            subject ->
+                subject
+                    .hasErrorContaining(errorSubstring)
+                    .onSource(module)
+                    .onLine(methodLine(source)));
   }
 
   private int methodLine(String source) {

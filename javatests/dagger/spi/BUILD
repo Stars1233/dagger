@@ -30,9 +30,9 @@ GenJavaTests(
     functional = False,
     javacopts = DOCLINT_HTML_AND_SYNTAX + DOCLINT_REFERENCES,
     deps = [
+        "//dagger-compiler/main/java/dagger/internal/codegen:processor",
         "//dagger-runtime/main/java/dagger:core",
-        "//java/dagger/internal/codegen:processor",
-        "//java/dagger/spi",
+        "//dagger-spi",
         "//third_party/java/auto:service",
         "//third_party/java/compile_testing",
         "//third_party/java/guava/base",

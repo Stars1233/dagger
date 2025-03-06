@@ -23,14 +23,14 @@ compiler_test(
     name = "DefineComponentProcessorTest",
     srcs = ["DefineComponentProcessorTest.java"],
     compiler_deps = [
-        "//java/dagger/hilt:entry_point",
-        "//java/dagger/hilt:install_in",
+        "//hilt-core/main/java/dagger/hilt:entry_point",
+        "//hilt-core/main/java/dagger/hilt:install_in",
         "//java/dagger/hilt/android/components",
         "//java/dagger/hilt/android/qualifiers",
     ],
     deps = [
+        "//dagger-compiler/main/java/dagger/internal/codegen/xprocessing:xprocessing-testing",
         "//java/dagger/hilt/android/testing/compile",
-        "//java/dagger/internal/codegen/xprocessing:xprocessing-testing",
         "//third_party/java/junit",
     ],
 )
