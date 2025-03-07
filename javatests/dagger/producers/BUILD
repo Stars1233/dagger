@@ -31,8 +31,8 @@ GenJavaTests(
     functional = 0,
     javacopts = JAVA_RELEASE_MIN + DOCLINT_REFERENCES + DOCLINT_HTML_AND_SYNTAX,
     deps = [
+        "//dagger-producers/main/java/dagger/producers",
         "//dagger-runtime/main/java/dagger:core",
-        "//java/dagger/producers",
         "//third_party/java/guava:testlib",
         "//third_party/java/guava/collect",
         "//third_party/java/guava/util/concurrent",

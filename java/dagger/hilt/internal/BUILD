@@ -20,60 +20,23 @@ load("@rules_java//java:defs.bzl", "java_library")
 package(default_visibility = ["//:src"])
 
 java_library(
-    name = "test_singleton_component",
-    srcs = ["TestSingletonComponent.java"],
-    deps = [":generated_component"],
-)
-
-java_library(
-    name = "generated_component",
-    srcs = ["GeneratedComponent.java"],
-)
-
-java_library(
     name = "test_singleton_component_manager",
     srcs = ["TestSingletonComponentManager.java"],
-    deps = [":component_manager"],
-)
-
-java_library(
-    name = "component_manager",
-    srcs = [
-        "GeneratedComponentManager.java",
-        "GeneratedComponentManagerHolder.java",
-    ],
-    exports = [
-        "//java/dagger/hilt/internal:preconditions",
-        "//java/dagger/hilt/internal:unsafe_casts",
-    ],
-)
-
-java_library(
-    name = "preconditions",
-    srcs = [
-        "Preconditions.java",
-    ],
-)
-
-java_library(
-    name = "unsafe_casts",
-    srcs = [
-        "UnsafeCasts.java",
-    ],
+    deps = ["//hilt-core/main/java/dagger/hilt/internal:component_manager"],
 )
 
 java_library(
     name = "component_entry_point",
     srcs = ["ComponentEntryPoint.java"],
     proguard_specs = ["proguard-rules.pro"],
-    deps = ["//java/dagger/hilt:generates_root_input"],
+    deps = ["//hilt-core/main/java/dagger/hilt:generates_root_input"],
 )
 
 java_library(
     name = "generated_entry_point",
     srcs = ["GeneratedEntryPoint.java"],
     proguard_specs = ["proguard-rules.pro"],
-    deps = ["//java/dagger/hilt:generates_root_input"],
+    deps = ["//hilt-core/main/java/dagger/hilt:generates_root_input"],
 )
 
 filegroup(

@@ -24,7 +24,7 @@ android_library(
     srcs = glob(["*.java"]),
     deps = [
         "//:dagger_with_compiler",
-        "//java/dagger/hilt:install_in",
+        "//hilt-core/main/java/dagger/hilt:install_in",
         "//java/dagger/hilt/android/components",
         "//java/dagger/hilt/android/internal",
         "//java/dagger/hilt/android/qualifiers",

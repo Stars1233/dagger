@@ -25,7 +25,7 @@ android_local_test(
     manifest_values = TEST_MANIFEST_VALUES,
     deps = [
         "//:android_local_test_exports",
-        "//java/dagger/hilt:entry_point",
+        "//hilt-core/main/java/dagger/hilt:entry_point",
         "//java/dagger/hilt/android:android_entry_point",
         "//java/dagger/hilt/android/testing:bind_value",
         "//java/dagger/hilt/android/testing:hilt_android_test",
@@ -42,7 +42,7 @@ android_local_test(
     deps = [
         "//:android_local_test_exports",
         "//:dagger_with_compiler",
-        "//java/dagger/hilt:entry_point",
+        "//hilt-core/main/java/dagger/hilt:entry_point",
         "//java/dagger/hilt/android:android_entry_point",
         "//java/dagger/hilt/android/testing:bind_value",
         "//java/dagger/hilt/android/testing:hilt_android_test",
@@ -60,7 +60,7 @@ android_local_test(
     deps = [
         "//:android_local_test_exports",
         "//:dagger_with_compiler",
-        "//java/dagger/hilt:entry_point",
+        "//hilt-core/main/java/dagger/hilt:entry_point",
         "//java/dagger/hilt/android:android_entry_point",
         "//java/dagger/hilt/android/testing:bind_value",
         "//java/dagger/hilt/android/testing:hilt_android_test",
@@ -77,7 +77,7 @@ android_local_test(
     deps = [
         "//:android_local_test_exports",
         "//:dagger_with_compiler",
-        "//java/dagger/hilt:entry_point",
+        "//hilt-core/main/java/dagger/hilt:entry_point",
         "//java/dagger/hilt/android:android_entry_point",
         "//java/dagger/hilt/android/testing:bind_value",
         "//java/dagger/hilt/android/testing:hilt_android_test",
@@ -95,7 +95,7 @@ android_local_test(
     deps = [
         "//:android_local_test_exports",
         "//:dagger_with_compiler",
-        "//java/dagger/hilt:install_in",
+        "//hilt-core/main/java/dagger/hilt:install_in",
         "//java/dagger/hilt/android:android_entry_point",
         "//java/dagger/hilt/android/testing:hilt_android_test",
         "//third_party/java/jsr330_inject",
@@ -133,7 +133,7 @@ android_local_test(
     manifest_values = TEST_MANIFEST_VALUES,
     deps = [
         "//:android_local_test_exports",
-        "//java/dagger/hilt:entry_point",
+        "//hilt-core/main/java/dagger/hilt:entry_point",
         "//java/dagger/hilt/android:android_entry_point",
         "//java/dagger/hilt/android/testing:bind_value",
         "//java/dagger/hilt/android/testing:hilt_android_test",

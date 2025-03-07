@@ -34,7 +34,7 @@ android_library(
         "InternalTestRoot.java",
     ],
     deps = [
-        "//java/dagger/hilt:generates_root_input",
+        "//hilt-core/main/java/dagger/hilt:generates_root_input",
     ],
 )
 
@@ -52,9 +52,9 @@ android_library(
         ":early_test_singleton_component_creator",
         ":test_component_data",
         ":test_injector",
+        "//hilt-core/main/java/dagger/hilt/internal:component_manager",
+        "//hilt-core/main/java/dagger/hilt/internal:preconditions",
         "//java/dagger/hilt/android/testing:on_component_ready_runner",
-        "//java/dagger/hilt/internal:component_manager",
-        "//java/dagger/hilt/internal:preconditions",
         "//java/dagger/hilt/internal:test_singleton_component_manager",
         "@maven//:junit_junit",
     ],
@@ -69,7 +69,7 @@ android_library(
     ],
     deps = [
         ":test_injector",
-        "//java/dagger/hilt/internal:component_manager",
+        "//hilt-core/main/java/dagger/hilt/internal:component_manager",
     ],
 )
 
@@ -78,7 +78,7 @@ android_library(
     testonly = 1,
     srcs = ["TestApplicationComponentManagerHolder.java"],
     deps = [
-        "//java/dagger/hilt/internal:component_manager",
+        "//hilt-core/main/java/dagger/hilt/internal:component_manager",
     ],
 )
 
@@ -89,9 +89,9 @@ android_library(
     deps = [
         ":test_application_component_manager",
         ":test_application_component_manager_holder",
+        "//hilt-core/main/java/dagger/hilt/internal:component_manager",
+        "//hilt-core/main/java/dagger/hilt/internal:preconditions",
         "//java/dagger/hilt/android/internal",
-        "//java/dagger/hilt/internal:component_manager",
-        "//java/dagger/hilt/internal:preconditions",
         "@maven//:androidx_test_core",
         "@maven//:junit_junit",
     ],

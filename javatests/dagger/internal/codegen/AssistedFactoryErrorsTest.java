@@ -916,4 +916,52 @@ public class AssistedFactoryErrorsTest {
                   .onLine(12);
             });
   }
+
+  @Test
+  public void testAssistedFactoryMethod_withNullableReturnType_withJavaSource_succeeds() {
+    Source foo =
+        CompilerTests.javaSource(
+            "test.Foo",
+            "package test;",
+            "",
+            "import dagger.assisted.AssistedInject;",
+            "import dagger.assisted.AssistedFactory;",
+            "import javax.annotation.Nullable;",
+            "",
+            "class Foo {",
+            "  @AssistedInject",
+            "  Foo() {}",
+            "",
+            "  @AssistedFactory",
+            "  interface FooFactory {",
+            "    @Nullable Foo create();",
+            "  }",
+            "}");
+
+    CompilerTests.daggerCompiler(foo)
+        .withProcessingOptions(compilerMode.processorOptions())
+        .compile(subject -> subject.hasErrorCount(0));
+  }
+
+  @Test
+  public void testAssistedFactoryMethod_withNullableReturnType_withKotlinSource_succeeds() {
+    Source foo =
+        CompilerTests.kotlinSource(
+            "test.Foo.kt",
+            "package test",
+            "",
+            "import dagger.assisted.AssistedInject",
+            "import dagger.assisted.AssistedFactory",
+            "",
+            "class Foo @AssistedInject constructor() {",
+            "  @AssistedFactory",
+            "  interface FooFactory {",
+            "    fun create(): Foo?",
+            "  }",
+            "}");
+
+    CompilerTests.daggerCompiler(foo)
+        .withProcessingOptions(compilerMode.processorOptions())
+        .compile(subject -> subject.hasErrorCount(0));
+  }
 }

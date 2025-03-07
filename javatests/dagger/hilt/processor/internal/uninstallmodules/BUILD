@@ -26,7 +26,7 @@ compiler_test(
         "//java/dagger/hilt/android:android_entry_point",
         "//java/dagger/hilt/android/testing:hilt_android_test",
         "//java/dagger/hilt/android/testing:uninstall_modules",
-        "//java/dagger/hilt/migration:disable_install_in_check",
+        "//hilt-core/main/java/dagger/hilt/migration:disable_install_in_check",
         "@androidsdk//:platforms/android-34/android.jar",
         "@maven//:androidx_annotation_annotation",
         "@maven//:androidx_annotation_annotation_jvm",

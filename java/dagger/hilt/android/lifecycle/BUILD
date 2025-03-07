@@ -37,14 +37,14 @@ android_library(
     ],
     exports = [
         "//:dagger_with_compiler",
-        "//java/dagger/hilt:install_in",
+        "//hilt-core/main/java/dagger/hilt:install_in",
+        "//hilt-core/main/java/dagger/hilt/codegen:originating_element",
         "//java/dagger/hilt/android/components",
         "//java/dagger/hilt/android/internal/lifecycle",
-        "//java/dagger/hilt/codegen:originating_element",
     ],
     deps = [
         ":package_info",
-        "//java/dagger/hilt:generates_root_input",
+        "//hilt-core/main/java/dagger/hilt:generates_root_input",
     ],
 )
 
