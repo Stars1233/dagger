@@ -25,17 +25,17 @@ compiler_test(
     compiler_deps = [
         ":InstallInModule",
         "//:dagger_with_compiler",
-        "//java/dagger/hilt:install_in",
-        "//java/dagger/hilt:entry_point",
-        "//java/dagger/hilt/components",
+        "//hilt-core/main/java/dagger/hilt:install_in",
+        "//hilt-core/main/java/dagger/hilt:entry_point",
+        "//hilt-core/main/java/dagger/hilt/components",
         "//java/dagger/hilt/android/internal/modules",
         "//java/dagger/hilt/testing:test_install_in",
         "//java/dagger/hilt/android/testing:hilt_android_test",
         "@androidsdk//:platforms/android-34/android.jar",
     ],
     deps = [
+        "//dagger-compiler/main/java/dagger/internal/codegen/xprocessing:xprocessing-testing",
         "//java/dagger/hilt/android/testing/compile",
-        "//java/dagger/internal/codegen/xprocessing:xprocessing-testing",
         "//third_party/java/compile_testing",
         "//third_party/java/junit",
     ],
@@ -45,16 +45,16 @@ compiler_test(
     name = "EarlyEntryPointProcessorTest",
     srcs = ["EarlyEntryPointProcessorTest.java"],
     compiler_deps = [
-        "//java/dagger/hilt:entry_point",
-        "//java/dagger/hilt:install_in",
+        "//hilt-core/main/java/dagger/hilt:entry_point",
+        "//hilt-core/main/java/dagger/hilt:install_in",
         "//java/dagger/hilt/android:early_entry_point",
         "//java/dagger/hilt/android/components",
         "//java/dagger/hilt/android/testing:hilt_android_test",
         "@androidsdk//:platforms/android-34/android.jar",
     ],
     deps = [
+        "//dagger-compiler/main/java/dagger/internal/codegen/xprocessing:xprocessing-testing",
         "//java/dagger/hilt/android/testing/compile",
-        "//java/dagger/internal/codegen/xprocessing:xprocessing-testing",
         "//third_party/java/junit",
     ],
 )
@@ -64,7 +64,7 @@ java_library(
     srcs = ["InstallInModule.java"],
     deps = [
         "//:dagger_with_compiler",
-        "//java/dagger/hilt:install_in",
-        "//java/dagger/hilt/components",
+        "//hilt-core/main/java/dagger/hilt:install_in",
+        "//hilt-core/main/java/dagger/hilt/components",
     ],
 )

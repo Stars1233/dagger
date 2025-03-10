@@ -61,7 +61,10 @@ import javax.lang.model.element.Modifier
  * }
  * ```
  */
-@OptIn(ExperimentalProcessingApi::class)
+@OptIn(
+    ExperimentalProcessingApi::class,
+    com.squareup.kotlinpoet.javapoet.KotlinPoetJavaPoetPreview::class
+)
 internal class ViewModelModuleGenerator(
   private val processingEnv: XProcessingEnv,
   private val viewModelMetadata: ViewModelMetadata,

@@ -69,8 +69,8 @@ _deploy \
 
 _deploy \
   "" \
-  java/dagger/hilt/artifact-core.jar \
-  java/dagger/hilt/pom.xml \
-  java/dagger/hilt/artifact-core-src.jar \
-  java/dagger/hilt/artifact-core-javadoc.jar \
+  hilt-core/artifact.jar \
+  hilt-core/pom.xml \
+  hilt-core/artifact-src.jar \
+  hilt-core/artifact-javadoc.jar \
   ""

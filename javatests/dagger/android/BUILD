@@ -27,7 +27,7 @@ GenRobolectricTests(
     javacopts = DOCLINT_HTML_AND_SYNTAX,
     deps = [
         "//:dagger_with_compiler",
-        "//java/dagger/android",
+        "//dagger-android/main/java/dagger/android",
         "//third_party/java/guava/collect",
         "//third_party/java/junit",
         "//third_party/java/truth",

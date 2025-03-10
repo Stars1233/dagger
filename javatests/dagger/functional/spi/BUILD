@@ -24,7 +24,7 @@ java_plugin(
     name = "test_plugin",
     srcs = ["TestPlugin.java"],
     deps = [
-        "//java/dagger/spi",
+        "//dagger-spi",
         "//third_party/java/auto:service",
         "//third_party/java/guava/base",
         "//third_party/java/guava/collect",

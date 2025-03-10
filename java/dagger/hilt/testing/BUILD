@@ -35,11 +35,11 @@ java_library(
         "//java/dagger/hilt/processor/internal/aggregateddeps:plugin",
     ],
     exports = [
-        "//java/dagger/hilt/processor/internal/aggregateddeps:annotation",
+        "//hilt-core/main/java/dagger/hilt/processor/internal/aggregateddeps:annotation",
     ],
     deps = [
         ":package_info",
-        "//java/dagger/hilt:generates_root_input",
+        "//hilt-core/main/java/dagger/hilt:generates_root_input",
     ],
 )
 

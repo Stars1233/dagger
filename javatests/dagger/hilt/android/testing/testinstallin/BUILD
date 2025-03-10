@@ -96,7 +96,7 @@ android_library(
     srcs = ["TestInstallInModules.java"],
     deps = [
         "//:dagger_with_compiler",
-        "//java/dagger/hilt:install_in",
+        "//hilt-core/main/java/dagger/hilt:install_in",
         "//java/dagger/hilt/android/components",
         "//java/dagger/hilt/testing:test_install_in",
         "@maven//:androidx_activity_activity",

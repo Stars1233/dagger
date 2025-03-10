@@ -24,7 +24,7 @@ java_plugin(
     generates_api = 1,
     processor_class = "dagger.hilt.processor.internal.disableinstallincheck.DisableInstallInCheckProcessor",
     visibility = [
-        "//java/dagger/hilt/migration:__pkg__",
+        "//hilt-core/main/java/dagger/hilt/migration:__pkg__",
     ],
     deps = [":processor_lib"],
 )
@@ -37,10 +37,10 @@ java_library(
         "KspDisableInstallInCheckProcessor.java",
     ],
     deps = [
+        "//dagger-compiler/main/java/dagger/internal/codegen/xprocessing",
         "//java/dagger/hilt/processor/internal:base_processor",
         "//java/dagger/hilt/processor/internal:classnames",
         "//java/dagger/hilt/processor/internal:processor_errors",
-        "//java/dagger/internal/codegen/xprocessing",
         "//third_party/java/auto:service",
         "//third_party/java/guava/collect",
         "//third_party/java/incap",
