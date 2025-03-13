@@ -30,4 +30,7 @@
  * service loader} to automatically configure the processor, so explict build configuration
  * shouldn't be necessary.
  */
+@NullMarked
 package dagger;
+
+import org.jspecify.annotations.NullMarked;

@@ -14,7 +14,6 @@
 
 load("@io_bazel_rules_kotlin//kotlin:kotlin.bzl", "define_kt_toolchain")
 load("@rules_java//java:defs.bzl", "java_library")
-load("//tools/jarjar:jarjar.bzl", "jarjar_library")
 load("//tools/javadoc:javadoc.bzl", "javadoc_library")
 
 package(default_visibility = ["//visibility:public"])
@@ -33,7 +32,7 @@ define_kt_toolchain(
 
 java_library(
     name = "dagger_with_compiler",
-    exported_plugins = ["//java/dagger/internal/codegen:component-codegen"],
+    exported_plugins = ["//dagger-compiler/main/java/dagger/internal/codegen:component-codegen"],
     exports = ["//dagger-runtime/main/java/dagger:core"],
 )
 
@@ -41,48 +40,32 @@ java_library(
     name = "producers_with_compiler",
     exports = [
         ":dagger_with_compiler",
-        "//java/dagger/producers",
+        "//dagger-producers/main/java/dagger/producers",
     ],
-)
-
-java_library(
-    name = "spi",
-    exports = ["//java/dagger/spi"],
 )
 
 java_library(
     name = "compiler_internals",
     exports = [
-        "//java/dagger/internal/codegen:processor",
-        "//java/dagger/internal/codegen/base",
-        "//java/dagger/internal/codegen/binding",
-        "//java/dagger/internal/codegen/validation",
-        "//java/dagger/internal/codegen/writing",
+        "//dagger-compiler/main/java/dagger/internal/codegen:processor",
+        "//dagger-compiler/main/java/dagger/internal/codegen/base",
+        "//dagger-compiler/main/java/dagger/internal/codegen/binding",
+        "//dagger-compiler/main/java/dagger/internal/codegen/validation",
+        "//dagger-compiler/main/java/dagger/internal/codegen/writing",
     ],
 )
 
 android_library(
     name = "android",
-    exported_plugins = ["//java/dagger/android/processor:plugin"],
-    exports = ["//java/dagger/android"],
+    exported_plugins = ["//dagger-android-processor:plugin"],
+    exports = ["//dagger-android/main/java/dagger/android"],
 )
 
 android_library(
     name = "android-support",
     exports = [
         ":android",
-        "//java/dagger/android/support",
-    ],
-)
-
-jarjar_library(
-    name = "shaded_grpc_server_processor",
-    jars = [
-        "//java/dagger/grpc/server/processor",
-        "//third_party/java/auto:common",
-    ],
-    rules = [
-        "rule com.google.auto.common.** dagger.grpc.shaded.auto.common.@1",
+        "//dagger-android-support/main/java/dagger/android/support",
     ],
 )
 
@@ -108,14 +91,17 @@ javadoc_library(
     name = "user-docs",
     testonly = 1,
     srcs = [
+        "//dagger-android-support/main/java/dagger/android/support:support-srcs",
+        "//dagger-android/main/java/dagger/android:android-srcs",
+        "//dagger-grpc-server-annotations/main/java/dagger/grpc/server:javadoc-srcs",
+        "//dagger-grpc-server/main/java/dagger/grpc/server:javadoc-srcs",
+        "//dagger-producers/main/java/dagger/producers:producers-srcs",
         "//dagger-runtime/main/java/dagger:javadoc-srcs",
-        "//java/dagger/android:android-srcs",
-        "//java/dagger/android/support:support-srcs",
-        "//java/dagger/grpc/server:javadoc-srcs",
-        "//java/dagger/grpc/server/processor:javadoc-srcs",
-        "//java/dagger/hilt:javadoc-srcs",
-        "//java/dagger/producers:producers-srcs",
-        "//java/dagger/spi:spi-srcs",
+        "//dagger-spi:srcs",
+        "//hilt-android:javadoc-srcs",
+        "//hilt-android-testing:javadoc-srcs",
+        "//hilt-core:javadoc-srcs",
+        "//java/dagger/hilt/android/plugin/main:srcs_filegroup",
     ],
     android_api_level = 34,
     # TODO(ronshapiro): figure out how to specify the version number for release builds
@@ -129,14 +115,13 @@ javadoc_library(
     ],
     root_packages = ["dagger"],
     deps = [
+        "//dagger-android-support/main/java/dagger/android/support",
+        "//dagger-android/main/java/dagger/android",
+        "//dagger-grpc-server:artifact-lib",
+        "//dagger-producers/main/java/dagger/producers",
         "//dagger-runtime/main/java/dagger:core",
-        "//java/dagger/android",
-        "//java/dagger/android/support",
-        "//java/dagger/grpc/server",
-        "//java/dagger/grpc/server/processor",
-        "//java/dagger/hilt/android:artifact-lib",
-        "//java/dagger/hilt/android/testing:artifact-lib",
-        "//java/dagger/producers",
-        "//java/dagger/spi",
+        "//dagger-spi",
+        "//hilt-android:artifact-lib",
+        "//hilt-android-testing:artifact-lib",
     ],
 )

@@ -24,7 +24,7 @@ java_test(
     size = "small",
     srcs = ["ProcessorsTest.java"],
     deps = [
-        "//java/dagger/hilt/processor/internal:processors",
+        "//hilt-compiler/main/java/dagger/hilt/processor/internal:processors",
         "//third_party/java/javapoet",
         "//third_party/java/junit",
         "//third_party/java/truth",

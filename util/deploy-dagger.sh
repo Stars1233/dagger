@@ -6,6 +6,7 @@ readonly MVN_GOAL="$1"
 readonly VERSION_NAME="$2"
 shift 2
 readonly EXTRA_MAVEN_ARGS=("$@")
+readonly _SHADED_RULES="com.google.auto.common,dagger.spi.internal.shaded.auto.common;androidx.room.compiler,dagger.spi.internal.shaded.androidx.room.compiler;kotlin.metadata,dagger.spi.internal.shaded.kotlin.metadata;androidx.room,dagger.spi.internal.shaded.androidx.room"
 
 # Builds and deploys the given artifacts to a configured maven goal.
 # @param {string} library the library to deploy.
@@ -52,91 +53,91 @@ _deploy \
   ""
 
 _deploy \
-  "com.google.auto.common,dagger.spi.internal.shaded.auto.common;androidx.room.compiler,dagger.spi.internal.shaded.androidx.room.compiler;kotlin.metadata,dagger.spi.internal.shaded.kotlin.metadata;androidx.room,dagger.spi.internal.shaded.androidx.room" \
-  java/dagger/internal/codegen/artifact.jar \
-  java/dagger/internal/codegen/pom.xml \
-  java/dagger/internal/codegen/artifact-src.jar \
-  java/dagger/internal/codegen/artifact-javadoc.jar \
+  "$_SHADED_RULES" \
+  dagger-compiler/artifact.jar \
+  dagger-compiler/pom.xml \
+  dagger-compiler/artifact-src.jar \
+  dagger-compiler/artifact-javadoc.jar \
   ""
 
 _deploy \
   "" \
-  java/dagger/producers/artifact.jar \
-  java/dagger/producers/pom.xml \
-  java/dagger/producers/artifact-src.jar \
-  java/dagger/producers/artifact-javadoc.jar \
+  dagger-producers/artifact.jar \
+  dagger-producers/pom.xml \
+  dagger-producers/artifact-src.jar \
+  dagger-producers/artifact-javadoc.jar \
   ""
 
 _deploy \
-  "com.google.auto.common,dagger.spi.internal.shaded.auto.common;androidx.room.compiler,dagger.spi.internal.shaded.androidx.room.compiler;kotlin.metadata,dagger.spi.internal.shaded.kotlin.metadata;androidx.room,dagger.spi.internal.shaded.androidx.room" \
-  java/dagger/spi/artifact.jar \
-  java/dagger/spi/pom.xml \
-  java/dagger/spi/artifact-src.jar \
-  java/dagger/spi/artifact-javadoc.jar \
-  ""
-
-_deploy \
-  "" \
-  java/dagger/android/artifact.aar \
-  java/dagger/android/pom.xml \
-  java/dagger/android/artifact-src.jar \
-  java/dagger/android/artifact-javadoc.jar \
+  "$_SHADED_RULES" \
+  dagger-spi/artifact.jar \
+  dagger-spi/pom.xml \
+  dagger-spi/artifact-src.jar \
+  dagger-spi/artifact-javadoc.jar \
   ""
 
 _deploy \
   "" \
-  java/dagger/android/android-legacy.aar \
-  java/dagger/android/legacy-pom.xml \
-  "" \
-  "" \
+  dagger-android/artifact.aar \
+  dagger-android/pom.xml \
+  dagger-android/artifact-src.jar \
+  dagger-android/artifact-javadoc.jar \
   ""
 
 _deploy \
   "" \
-  java/dagger/android/support/artifact.aar \
-  java/dagger/android/support/pom.xml \
-  java/dagger/android/support/artifact-src.jar \
-  java/dagger/android/support/artifact-javadoc.jar \
-  ""
-
-_deploy \
-  "" \
-  java/dagger/android/support/support-legacy.aar \
-  java/dagger/android/support/legacy-pom.xml \
+  dagger-android/android-legacy.aar \
+  dagger-android/legacy-pom.xml \
   "" \
   "" \
   ""
 
 _deploy \
-  "com.google.auto.common,dagger.spi.internal.shaded.auto.common;androidx.room.compiler,dagger.spi.internal.shaded.androidx.room.compiler;kotlin.metadata,dagger.spi.internal.shaded.kotlin.metadata;androidx.room,dagger.spi.internal.shaded.androidx.room" \
-  java/dagger/android/processor/artifact.jar \
-  java/dagger/android/processor/pom.xml \
-  java/dagger/android/processor/artifact-src.jar \
-  java/dagger/android/processor/artifact-javadoc.jar \
+  "" \
+  dagger-android-support/artifact.aar \
+  dagger-android-support/pom.xml \
+  dagger-android-support/artifact-src.jar \
+  dagger-android-support/artifact-javadoc.jar \
   ""
 
 _deploy \
   "" \
-  java/dagger/grpc/server/libserver.jar \
-  java/dagger/grpc/server/server-pom.xml \
-  java/dagger/grpc/server/libserver-src.jar \
-  java/dagger/grpc/server/javadoc.jar \
+  dagger-android-support/support-legacy.aar \
+  dagger-android-support/legacy-pom.xml \
+  "" \
+  "" \
+  ""
+
+_deploy \
+  "$_SHADED_RULES" \
+  dagger-android-processor/artifact.jar \
+  dagger-android-processor/pom.xml \
+  dagger-android-processor/artifact-src.jar \
+  dagger-android-processor/artifact-javadoc.jar \
   ""
 
 _deploy \
   "" \
-  java/dagger/grpc/server/libannotations.jar \
-  java/dagger/grpc/server/annotations-pom.xml \
-  java/dagger/grpc/server/libannotations-src.jar \
-  java/dagger/grpc/server/javadoc.jar \
+  dagger-grpc-server/artifact.jar \
+  dagger-grpc-server/pom.xml \
+  dagger-grpc-server/artifact-src.jar \
+  dagger-grpc-server/artifact-javadoc.jar \
   ""
 
 _deploy \
   "" \
-  shaded_grpc_server_processor.jar \
-  java/dagger/grpc/server/processor/pom.xml \
-  java/dagger/grpc/server/processor/libprocessor-src.jar \
-  java/dagger/grpc/server/processor/javadoc.jar \
+  dagger-grpc-server-annotations/artifact.jar \
+  dagger-grpc-server-annotations/pom.xml \
+  dagger-grpc-server-annotations/artifact-src.jar \
+  dagger-grpc-server-annotations/artifact-javadoc.jar \
+  ""
+
+_deploy \
+  "$_SHADED_RULES" \
+  dagger-grpc-server-processor/artifact.jar \
+  dagger-grpc-server-processor/pom.xml \
+  dagger-grpc-server-processor/artifact-src.jar \
+  dagger-grpc-server-processor/artifact-javadoc.jar \
   ""
 
 _deploy \

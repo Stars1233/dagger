@@ -1,8 +1,8 @@
 bazel_dep(name = "bazel_skylib", version = "1.7.1")
 bazel_dep(name = "rules_java", version = "8.6.0")
-bazel_dep(name = "rules_jvm_external", version = "6.6")
+bazel_dep(name = "rules_jvm_external", version = "6.7")
 bazel_dep(name = "rules_android", version = "0.6.0")
-bazel_dep(name = "rules_kotlin", version = "1.9.6", repo_name = "io_bazel_rules_kotlin")
+bazel_dep(name = "rules_kotlin", version = "2.1.0", repo_name = "io_bazel_rules_kotlin")
 bazel_dep(name = "rules_robolectric", version = "4.14.1.2", repo_name = "robolectric")
 bazel_dep(name = "protobuf", version = "29.0", repo_name = "com_google_protobuf")
 
@@ -23,6 +23,8 @@ use_repo(android_sdk_repository_extension, "androidsdk")
 register_toolchains("@androidsdk//:sdk-toolchain", "@androidsdk//:all")
 
 # Define the versions of the maven dependencies we use.
+
+ANDROID_LINT_VERSION = "30.3.1"
 
 ANT_VERSION = "1.9.6"
 
@@ -47,9 +49,9 @@ GRPC_VERSION = "1.2.0"
 
 INCAP_VERSION = "0.2"
 
-KOTLIN_VERSION = "2.0.21"
+KOTLIN_VERSION = "2.1.10"
 
-KSP_VERSION = KOTLIN_VERSION + "-1.0.28"
+KSP_VERSION = KOTLIN_VERSION + "-1.0.31"
 
 MAVEN_VERSION = "3.3.3"
 
@@ -69,6 +71,8 @@ maven = use_extension("@rules_jvm_external//:extensions.bzl", "maven")
         "androidx.test:monitor:1.4.0",
         "androidx.test:core:1.4.0",
         "androidx.test.ext:junit:1.1.3",
+        "com.android.tools.lint:lint-tests:%s" % ANDROID_LINT_VERSION,
+        "com.android.tools:testutils:%s" % ANDROID_LINT_VERSION,
         "com.google.guava:guava-testlib:%s-jre" % GUAVA_VERSION,
         "com.google.testing.compile:compile-testing:0.18",
         "com.google.truth.extensions:truth-java8-extension:1.4.0",
@@ -99,6 +103,12 @@ maven.install(
         "com.android.support:appcompat-v7:25.0.0",
         "com.android.support:support-annotations:25.0.0",
         "com.android.support:support-fragment:25.0.0",
+        "com.android.tools.external.org-jetbrains:uast:%s" % ANDROID_LINT_VERSION,
+        "com.android.tools.external.com-intellij:intellij-core:%s" % ANDROID_LINT_VERSION,
+        "com.android.tools.external.com-intellij:kotlin-compiler:%s" % ANDROID_LINT_VERSION,
+        "com.android.tools.lint:lint:%s" % ANDROID_LINT_VERSION,
+        "com.android.tools.lint:lint-api:%s" % ANDROID_LINT_VERSION,
+        "com.android.tools.lint:lint-checks:%s" % ANDROID_LINT_VERSION,
         "com.google.auto:auto-common:%s" % AUTO_COMMON_VERSION,
         "com.google.auto.factory:auto-factory:1.0",
         "com.google.auto.service:auto-service:1.0",
@@ -166,33 +176,3 @@ maven.install(
     ],
 )
 use_repo(maven, "maven")
-
-# TODO(b/394123765): Merge these dependencies back into the "maven" repo and remove "maven_lint".
-# For now, we isolate "com.android.tools.lint:lint" from the rest of the maven dependencies because
-# one of its dependencies, "org.codehaus.groovy:groovy-all", depends on some testonly targets, e.g.
-# "org.codehaus.groovy:groovy-test", but isn't marked as testonly itself. To work around this issue,
-# we define a separate "maven_lint" repository that doesn't mark anything as testonly.
-ANDROID_LINT_VERSION = "30.1.0"
-
-maven.install(
-    name = "maven_lint",
-    artifacts = [
-        "com.android.tools.external.org-jetbrains:uast:%s" % ANDROID_LINT_VERSION,
-        "com.android.tools.external.com-intellij:intellij-core:%s" % ANDROID_LINT_VERSION,
-        "com.android.tools.external.com-intellij:kotlin-compiler:%s" % ANDROID_LINT_VERSION,
-        "com.android.tools.lint:lint:%s" % ANDROID_LINT_VERSION,
-        "com.android.tools.lint:lint-api:%s" % ANDROID_LINT_VERSION,
-        "com.android.tools.lint:lint-checks:%s" % ANDROID_LINT_VERSION,
-        "com.android.tools.lint:lint-tests:%s" % ANDROID_LINT_VERSION,
-        "com.android.tools:testutils:%s" % ANDROID_LINT_VERSION,
-        "com.google.auto:auto-common:%s" % AUTO_COMMON_VERSION,
-        "com.google.auto.service:auto-service:1.0",
-        "com.google.auto.service:auto-service-annotations:1.0",
-        "junit:junit:4.13.2",
-    ],
-    repositories = [
-        "https://repo1.maven.org/maven2",
-        "https://maven.google.com",
-    ],
-)
-use_repo(maven, "maven_lint")

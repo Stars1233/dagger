@@ -16,16 +16,17 @@
 
 package dagger;
 
+import org.jspecify.annotations.Nullable;
+
 /**
  * Injects dependencies into the fields and methods on instances of type {@code T}. Ignores the
  * presence or absence of an injectable constructor.
  *
  * @param <T> type to inject members of
- *
- * @since 2.0 (since 1.0 without the provision that {@link #injectMembers} cannot accept
- *      {@code null})
+ * @since 2.0 (since 1.0 without the provision that {@link #injectMembers} cannot accept {@code
+ *     null})
  */
-public interface MembersInjector<T> {
+public interface MembersInjector<T extends @Nullable Object> {
 
   /**
    * Injects dependencies into the fields and methods of {@code instance}. Ignores the presence or

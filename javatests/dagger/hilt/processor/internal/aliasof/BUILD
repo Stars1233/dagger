@@ -26,14 +26,14 @@ compiler_test(
     compiler_deps = [
         "@androidsdk//:platforms/android-34/android.jar",
         "//third_party/java/jsr330_inject",
-        "//java/dagger/hilt/android:hilt_android_app",
-        "//java/dagger/hilt/android/components",
-        "//java/dagger/hilt:define_component",
-        "//java/dagger/hilt/migration:alias_of",
+        "//hilt-android/main/java/dagger/hilt/android:hilt_android_app",
+        "//hilt-android/main/java/dagger/hilt/android/components",
+        "//hilt-core/main/java/dagger/hilt:define_component",
+        "//hilt-core/main/java/dagger/hilt/migration:alias_of",
     ],
     deps = [
-        "//java/dagger/hilt/android/testing/compile",
-        "//java/dagger/internal/codegen/xprocessing:xprocessing-testing",
+        "//dagger-compiler/main/java/dagger/internal/codegen/xprocessing:xprocessing-testing",
+        "//hilt-android-testing/main/java/dagger/hilt/android/testing/compile",
         "//third_party/java/junit",
     ],
 )

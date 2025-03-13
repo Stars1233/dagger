@@ -4,19 +4,6 @@ plugins {
   alias(libs.plugins.binaryCompatibilityValidator)
 }
 
-// TODO: Configure via convention plugin
-sourceSets {
-  main {
-    java.srcDirs("main/java")
-    kotlin.srcDirs("main/java")
-    resources.srcDirs("main/resources")
-  }
-  test {
-    java.srcDirs("test/javatests")
-    kotlin.srcDirs("test/javatests")
-  }
-}
-
 dependencies {
   api(libs.javax.inject)
   api(libs.jakarta.inject)

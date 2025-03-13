@@ -23,6 +23,7 @@ import org.gradle.api.plugins.JavaPluginExtension
 import org.gradle.jvm.toolchain.JavaLanguageVersion
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension
+import org.jetbrains.kotlin.gradle.dsl.KotlinProjectExtension
 import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
 
 /**
@@ -36,25 +37,23 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
  * }
  * ```
  *
- * Source sets for the project should be configured using the `daggerSources` extension:
+ * Source sets for the project are configured by this plugin and should have the following
+ * convention:
  * ```
- * daggerSources {
- *     main.setPackages(
- *         listOf("dagger", "dagger/internal")
- *     )
- *     main.setResources(
- *         mapOf("dagger/r8.pro" to "META-INF/com.android.tools/r8")
- *     )
- *     test.setPackages(
- *         listOf("dagger", "dagger/internal")
- *     )
- * }
+ * <project>
+ *   main
+ *     java - Library sources
+ *     resources - Library resources
+ *   test
+ *     javatests - Unit test sources
+ *     resources - Unit test resources
  * ```
  */
 class KotlinJvmConventionPlugin : Plugin<Project> {
   override fun apply(project: Project) {
     project.pluginManager.apply(project.getPluginIdByName("kotlinJvm"))
     project.plugins.withId(project.getPluginIdByName("kotlinJvm")) {
+      configureSourceSets(project)
       val kotlinProject = project.extensions.getByName("kotlin") as KotlinJvmProjectExtension
       kotlinProject.jvmToolchain {
         languageVersion.set(JavaLanguageVersion.of(project.getVersionByName("jdk")))
@@ -67,6 +66,28 @@ class KotlinJvmConventionPlugin : Plugin<Project> {
       val javaProject = project.extensions.getByName("java") as JavaPluginExtension
       javaProject.sourceCompatibility = JavaVersion.toVersion(project.getVersionByName("jvmTarget"))
       javaProject.targetCompatibility = JavaVersion.toVersion(project.getVersionByName("jvmTarget"))
+    }
+  }
+
+  private fun configureSourceSets(project: Project) {
+    val kotlinExtension =
+      project.extensions.findByType(KotlinProjectExtension::class.java)
+        ?: error("Unable to find Kotlin Project Extension")
+    val javaExtension =
+      project.extensions.findByType(JavaPluginExtension::class.java)
+        ?: error("Unable to find Java Project Extension")
+    listOf("main", "test").forEach { name ->
+      val rootSrcDir =
+        when (name) {
+          "main" -> "java"
+          "test" -> "javatests"
+          else -> error("Unknown source set named '$name'.")
+        }
+      kotlinExtension.sourceSets.named(name).configure {
+        kotlin.srcDirs("$name/$rootSrcDir")
+        resources.srcDirs("$name/resources")
+      }
+      javaExtension.sourceSets.named(name).configure { java.srcDirs("$name/$rootSrcDir") }
     }
   }
 }

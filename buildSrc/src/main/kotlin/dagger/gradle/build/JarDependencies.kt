@@ -21,15 +21,15 @@ import org.gradle.api.file.RegularFile
 
 fun Project.findBootstrapCompilerJar(): RegularFile =
   rootProject.layout.projectDirectory
-    .dir("java/dagger/internal/codegen/bootstrap")
+    .dir("dagger-compiler/main/java/dagger/internal/codegen/bootstrap")
     .file("bootstrap_compiler_deploy.jar")
 
 fun Project.findXProcessingJar(): RegularFile =
   rootProject.layout.projectDirectory
-    .dir("java/dagger/internal/codegen/xprocessing")
+    .dir("dagger-compiler/main/java/dagger/internal/codegen/xprocessing")
     .file("xprocessing-internal.jar")
 
 fun Project.findXProcessingTestingJar(): RegularFile =
   rootProject.layout.projectDirectory
-    .dir("java/dagger/internal/codegen/xprocessing")
+    .dir("dagger-compiler/main/java/dagger/internal/codegen/xprocessing")
     .file("xprocessing-testing-internal.jar")

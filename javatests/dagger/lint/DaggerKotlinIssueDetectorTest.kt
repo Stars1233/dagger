@@ -215,31 +215,31 @@ class DaggerKotlinIssueDetectorTest : LintDetectorTest() {
       )
       .expectFixDiffs(
         """
-        Fix for src/foo/MyQualifier.kt line 14: Remove 'field:':
+        Autofix for src/foo/MyQualifier.kt line 14: Remove 'field:':
         @@ -14 +14
         -   @field:MyQualifier
         +   @MyQualifier
-        Fix for src/foo/MyQualifier.kt line 26: Remove @JvmStatic:
+        Autofix for src/foo/MyQualifier.kt line 26: Remove @JvmStatic:
         @@ -26 +26
         -   @JvmStatic
         +  
-        Fix for src/foo/MyQualifier.kt line 43: Remove @JvmStatic:
+        Autofix for src/foo/MyQualifier.kt line 43: Remove @JvmStatic:
         @@ -43 +43
         -     @JvmStatic
         +    
-        Fix for src/foo/MyQualifier.kt line 56: Remove @JvmStatic:
+        Autofix for src/foo/MyQualifier.kt line 56: Remove @JvmStatic:
         @@ -56 +56
         -     @kotlin.jvm.JvmStatic
         +    
-        Fix for src/foo/MyQualifier.kt line 66: Remove @Module:
+        Autofix for src/foo/MyQualifier.kt line 66: Remove @Module:
         @@ -67 +67
         -   @Module
         +  
-        Fix for src/foo/MyQualifier.kt line 78: Remove @Module:
+        Autofix for src/foo/MyQualifier.kt line 78: Remove @Module:
         @@ -80 +80
         -   @dagger.Module
         +  
-        Fix for src/foo/MyQualifier.kt line 101: Remove @Module:
+        Autofix for src/foo/MyQualifier.kt line 101: Remove @Module:
         @@ -102 +102
         -   @Module
         +  

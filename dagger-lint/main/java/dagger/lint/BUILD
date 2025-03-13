@@ -25,34 +25,13 @@ kt_jvm_library(
     srcs = glob(["*.kt"]),
     tags = ["maven_coordinates=com.google.dagger:dagger-lint:" + POM_VERSION],
     deps = [
-        ":auto_service",
-        "@maven_lint//:com_android_tools_external_com_intellij_intellij_core",
-        "@maven_lint//:com_android_tools_external_com_intellij_kotlin_compiler",
-        "@maven_lint//:com_android_tools_external_org_jetbrains_uast",
-        "@maven_lint//:com_android_tools_lint_lint",
-        "@maven_lint//:com_android_tools_lint_lint_api",
+        "//third_party/java/auto:service",
+        "@maven//:com_android_tools_external_com_intellij_intellij_core",
+        "@maven//:com_android_tools_external_com_intellij_kotlin_compiler",
+        "@maven//:com_android_tools_external_org_jetbrains_uast",
+        "@maven//:com_android_tools_lint_lint",
+        "@maven//:com_android_tools_lint_lint_api",
     ],
-)
-
-# Note: We don't use the "//third_party/java/auto" targets here because those use the `@maven`
-# repository dependencies, which could cause a 1-version violation. Thus, we redefine them here
-# using the `@maven_lint` dependencies.
-java_plugin(
-    name = "auto_service_processor",
-    processor_class = "com.google.auto.service.processor.AutoServiceProcessor",
-    deps = [
-        "@maven_lint//:com_google_auto_auto_common",
-        "@maven_lint//:com_google_auto_service_auto_service",
-        "@maven_lint//:com_google_auto_service_auto_service_annotations",
-        "@maven_lint//:com_google_guava_guava",
-    ],
-)
-
-java_library(
-    name = "auto_service",
-    exported_plugins = [":auto_service_processor"],
-    tags = ["maven:compile_only"],
-    exports = ["@maven_lint//:com_google_auto_service_auto_service_annotations"],
 )
 
 # Current `kt_jvm_library` does not output source jars and gen_maven_artifact expects one.
