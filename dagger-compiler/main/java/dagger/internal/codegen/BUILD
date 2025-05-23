@@ -21,7 +21,7 @@ load(
     "POM_VERSION",
 )
 
-package(default_visibility = ["//:src"])
+package(default_visibility = ["//dagger-compiler:internal"])
 
 java_library(
     name = "processor",

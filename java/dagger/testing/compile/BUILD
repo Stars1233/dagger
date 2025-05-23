@@ -30,8 +30,8 @@ java_library(
         "//dagger-compiler/main/java/dagger/internal/codegen/xprocessing:xprocessing-testing",
     ],
     deps = [
+        "//dagger-compiler:xprocessing",
         "//dagger-compiler/main/java/dagger/internal/codegen:processor",
-        "//dagger-compiler/main/java/dagger/internal/codegen/xprocessing",
         "//dagger-compiler/main/java/dagger/internal/codegen/xprocessing:xprocessing-testing",
         "//dagger-spi",
         "//third_party/java/auto:value",
