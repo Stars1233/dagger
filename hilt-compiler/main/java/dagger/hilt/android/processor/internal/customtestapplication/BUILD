@@ -37,7 +37,7 @@ java_library(
         "KspCustomTestApplicationProcessor.java",
     ],
     deps = [
-        "//dagger-compiler/main/java/dagger/internal/codegen/xprocessing",
+        "//dagger-compiler:xprocessing",
         "//dagger-spi",
         "//hilt-compiler/main/java/dagger/hilt/processor/internal:base_processor",
         "//hilt-compiler/main/java/dagger/hilt/processor/internal:classnames",

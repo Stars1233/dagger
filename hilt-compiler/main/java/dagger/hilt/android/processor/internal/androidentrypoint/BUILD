@@ -36,7 +36,7 @@ java_library(
     deps = [
         ":android_generators",
         ":metadata",
-        "//dagger-compiler/main/java/dagger/internal/codegen/xprocessing",
+        "//dagger-compiler:xprocessing",
         "//hilt-compiler/main/java/dagger/hilt/android/processor/internal:android_classnames",
         "//hilt-compiler/main/java/dagger/hilt/processor/internal:base_processor",
         "//hilt-compiler/main/java/dagger/hilt/processor/internal:compiler_options",
@@ -64,7 +64,7 @@ java_library(
     ],
     deps = [
         ":metadata",
-        "//dagger-compiler/main/java/dagger/internal/codegen/xprocessing",
+        "//dagger-compiler:xprocessing",
         "//dagger-spi",
         "//hilt-compiler/main/java/dagger/hilt/android/processor/internal:android_classnames",
         "//hilt-compiler/main/java/dagger/hilt/processor/internal:classnames",
@@ -85,7 +85,7 @@ java_library(
         "AndroidEntryPointMetadata.java",
     ],
     deps = [
-        "//dagger-compiler/main/java/dagger/internal/codegen/xprocessing",
+        "//dagger-compiler:xprocessing",
         "//dagger-spi",
         "//hilt-compiler/main/java/dagger/hilt/android/processor/internal:android_classnames",
         "//hilt-compiler/main/java/dagger/hilt/processor/internal:compiler_options",

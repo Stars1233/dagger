@@ -39,7 +39,7 @@ java_library(
     ],
     deps = [
         ":pkg_private_metadata",
-        "//dagger-compiler/main/java/dagger/internal/codegen/xprocessing",
+        "//dagger-compiler:xprocessing",
         "//dagger-spi",
         "//hilt-compiler/main/java/dagger/hilt/processor/internal:base_processor",
         "//hilt-compiler/main/java/dagger/hilt/processor/internal:classnames",
@@ -59,7 +59,7 @@ java_library(
     name = "pkg_private_metadata",
     srcs = ["PkgPrivateMetadata.java"],
     deps = [
-        "//dagger-compiler/main/java/dagger/internal/codegen/xprocessing",
+        "//dagger-compiler:xprocessing",
         "//hilt-compiler/main/java/dagger/hilt/processor/internal:classnames",
         "//hilt-compiler/main/java/dagger/hilt/processor/internal:processors",
         "//third_party/java/auto:value",
@@ -76,7 +76,7 @@ java_library(
     ],
     deps = [
         ":pkg_private_metadata",
-        "//dagger-compiler/main/java/dagger/internal/codegen/xprocessing",
+        "//dagger-compiler:xprocessing",
         "//dagger-spi",
         "//hilt-compiler/main/java/dagger/hilt/processor/internal:aggregated_elements",
         "//hilt-compiler/main/java/dagger/hilt/processor/internal:classnames",

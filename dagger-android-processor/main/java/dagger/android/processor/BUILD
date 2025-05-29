@@ -36,7 +36,7 @@ java_library(
     name = "base_processing_step",
     srcs = ["BaseProcessingStep.java"],
     deps = [
-        "//dagger-compiler/main/java/dagger/internal/codegen/xprocessing",
+        "//dagger-compiler:xprocessing",
         "//dagger-spi",
         "//third_party/java/guava/base",
         "//third_party/java/guava/collect",
@@ -54,7 +54,7 @@ java_library(
     tags = ["maven_coordinates=com.google.dagger:dagger-android-processor:" + POM_VERSION],
     deps = [
         ":base_processing_step",
-        "//dagger-compiler/main/java/dagger/internal/codegen/xprocessing",
+        "//dagger-compiler:xprocessing",
         "//dagger-runtime/main/java/dagger:core",
         "//dagger-spi",
         "//third_party/java/auto:service",

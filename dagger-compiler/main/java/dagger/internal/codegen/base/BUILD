@@ -17,7 +17,7 @@
 
 load("@rules_java//java:defs.bzl", "java_library")
 
-package(default_visibility = ["//:src"])
+package(default_visibility = ["//dagger-compiler:internal"])
 
 SHARED_SOURCES = [
     "ClearableCache.java",

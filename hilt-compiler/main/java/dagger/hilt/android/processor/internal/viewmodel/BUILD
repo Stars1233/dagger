@@ -37,7 +37,7 @@ kt_jvm_library(
         "ViewModelProcessor.kt",
     ],
     deps = [
-        "//dagger-compiler/main/java/dagger/internal/codegen/xprocessing",
+        "//dagger-compiler:xprocessing",
         "//hilt-compiler/main/java/dagger/hilt/android/processor/internal:android_classnames",
         "//hilt-compiler/main/java/dagger/hilt/processor/internal:base_processor",
         "//hilt-compiler/main/java/dagger/hilt/processor/internal:classnames",
@@ -63,7 +63,7 @@ kt_jvm_library(
         "ViewModelValidationPlugin.kt",
     ],
     deps = [
-        "//dagger-compiler/main/java/dagger/internal/codegen/xprocessing",
+        "//dagger-compiler:xprocessing",
         "//dagger-spi",
         "//hilt-compiler/main/java/dagger/hilt/android/processor/internal:android_classnames",
         "//hilt-compiler/main/java/dagger/hilt/processor/internal:dagger_models",
