@@ -25,7 +25,6 @@ GenJavaTests(
         "OptionalBindingComponentsWithInaccessibleTypesTest.java",
     ],
     javacopts = DOCLINT_HTML_AND_SYNTAX,
-    require_jdk7_syntax = False,
     test_only_deps = [
         "//third_party/java/guava/base",
         "//third_party/java/guava/collect",

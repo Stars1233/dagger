@@ -24,7 +24,6 @@ package(default_visibility = ["//:src"])
 GenJavaTests(
     name = "PropertyQualifierTest",
     srcs = ["PropertyQualifierTest.java"],
-    functional = True,
     test_only_deps = [
         "//third_party/java/guava/base",
         "//third_party/java/guava/collect",
@@ -73,7 +72,6 @@ java_library(
 GenJavaTests(
     name = "ObjectModuleTest",
     srcs = ["ObjectModuleTest.java"],
-    functional = True,
     test_only_deps = [
         "//third_party/java/guava/base",
         "//third_party/java/guava/collect",
@@ -101,7 +99,6 @@ kt_jvm_library(
 GenJavaTests(
     name = "DependsOnGeneratedCodeTest",
     srcs = ["DependsOnGeneratedCodeTest.java"],
-    functional = True,
     test_only_deps = [
         "//third_party/java/guava/base",
         "//third_party/java/guava/collect",
@@ -127,7 +124,6 @@ kt_jvm_library(
 GenJavaTests(
     name = "CompanionModuleTest",
     srcs = ["CompanionModuleTest.java"],
-    functional = True,
     test_only_deps = [
         "//third_party/java/guava/base",
         "//third_party/java/guava/collect",

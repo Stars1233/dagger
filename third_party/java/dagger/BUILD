@@ -36,13 +36,13 @@ android_library(
 java_library(
     name = "compiler",
     exports = [
-        "//dagger-compiler/main/java/dagger/internal/codegen:processor",
+        "//dagger-compiler:processor",
     ],
 )
 
 java_library(
     name = "dagger",
-    exported_plugins = ["//dagger-compiler/main/java/dagger/internal/codegen:component-codegen"],
+    exported_plugins = ["//dagger-compiler:component-codegen"],
     exports = ["//dagger-runtime/main/java/dagger:core"],
 )
 

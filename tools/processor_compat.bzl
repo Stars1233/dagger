@@ -19,7 +19,7 @@ load("@rules_java//java:defs.bzl", "java_plugin")
 
 def compat_processor_plugin(
         name,
-        processor_base_name,
+        javac_processor_name,
         processor_lib_dep,
         generates_api = False,
         tags = [],
@@ -33,7 +33,7 @@ def compat_processor_plugin(
     java_plugin(
         name = name,
         generates_api = generates_api,
-        processor_class = pkg + "." + processor_base_name + "Processor",
+        processor_class = pkg + "." + javac_processor_name,
         deps = [processor_lib_dep],
         tags = tags,
         visibility = visibility,

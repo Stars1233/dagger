@@ -28,7 +28,7 @@ compiler_test(
         "//third_party/java/androidx/annotation",
     ],
     deps = [
-        "//dagger-compiler/main/java/dagger/internal/codegen/xprocessing",
+        "//dagger-compiler:xprocessing",
         "//dagger-compiler/main/java/dagger/internal/codegen/xprocessing:xprocessing-testing",
         "//dagger-spi",
         "//hilt-android-testing/main/java/dagger/hilt/android/testing/compile",

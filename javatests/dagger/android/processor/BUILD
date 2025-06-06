@@ -16,14 +16,13 @@
 #   Tests for Dagger's Android integrations
 
 load("//:build_defs.bzl", "DOCLINT_HTML_AND_SYNTAX")
-load("//:test_defs.bzl", "GenJavaTests")
+load("//:test_defs.bzl", "GenCompilerTests")
 
 package(default_visibility = ["//:src"])
 
-GenJavaTests(
+GenCompilerTests(
     name = "android_processor_tests",
     srcs = glob(["*.java"]),
-    functional = False,
     javacopts = DOCLINT_HTML_AND_SYNTAX,
     deps = [
         "//dagger-android-processor/main/java/dagger/android/processor",

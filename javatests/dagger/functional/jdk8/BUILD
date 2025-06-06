@@ -37,7 +37,6 @@ GenJavaTests(
     name = "OptionalBindingComponentsEmptyTest",
     srcs = ["OptionalBindingComponentsEmptyTest.java"],
     javacopts = DOCLINT_HTML_AND_SYNTAX,
-    require_jdk7_syntax = False,
     test_only_deps = [
         ":optional_binding_components",
         "//third_party/java/guava/base",
@@ -57,7 +56,6 @@ GenJavaTests(
     name = "OptionalBindingComponentsPresentTest",
     srcs = ["OptionalBindingComponentsPresentTest.java"],
     javacopts = DOCLINT_HTML_AND_SYNTAX,
-    require_jdk7_syntax = False,
     test_only_deps = [
         ":optional_binding_components",
         "//third_party/java/guava/base",

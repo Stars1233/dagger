@@ -23,7 +23,6 @@ package(default_visibility = ["//:src"])
 GenRobolectricTests(
     name = "android-support-tests",
     srcs = glob(["*.java"]),
-    functional = False,
     javacopts = DOCLINT_HTML_AND_SYNTAX,
     deps = [
         "//dagger-android-support/main/java/dagger/android/support",
