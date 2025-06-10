@@ -26,13 +26,11 @@ GenJavaTests(
         ":KotlinAssistedInjectionClasses",
     ],
     javacopts = DOCLINT_HTML_AND_SYNTAX,
-    test_only_deps = [
-        "//third_party/java/junit",
-        "//third_party/java/truth",
-    ],
     deps = [
         "//third_party/java/auto:factory",
         "//third_party/java/dagger",
+        "//third_party/java/junit",
+        "//third_party/java/truth",
     ],
 )
 

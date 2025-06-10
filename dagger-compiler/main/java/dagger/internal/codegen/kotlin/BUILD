@@ -17,7 +17,7 @@
 
 load("//tools:bazel_compat.bzl", "compat_kt_jvm_library")
 
-package(default_visibility = ["//:src"])
+package(default_visibility = ["//dagger-compiler:internal"])
 
 compat_kt_jvm_library(
     name = "kotlin",

@@ -17,7 +17,7 @@
 
 load("@rules_java//java:defs.bzl", "java_library")
 
-package(default_visibility = ["//:src"])
+package(default_visibility = ["//dagger-compiler:internal"])
 
 java_library(
     name = "validation",
@@ -29,7 +29,6 @@ java_library(
         "//dagger-compiler/main/java/dagger/internal/codegen/binding",
         "//dagger-compiler/main/java/dagger/internal/codegen/compileroption",
         "//dagger-compiler/main/java/dagger/internal/codegen/kotlin",
-        "//dagger-compiler/main/java/dagger/internal/codegen/langmodel",
         "//dagger-compiler/main/java/dagger/internal/codegen/model",
         "//dagger-compiler/main/java/dagger/internal/codegen/xprocessing",
         "//dagger-runtime/main/java/dagger:core",

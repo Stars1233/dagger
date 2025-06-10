@@ -22,7 +22,7 @@ package(default_visibility = ["//:src"])
 compat_processor_plugin(
     name = "bind_value_processor",
     generates_api = 1,
-    processor_base_name = "BindValue",
+    javac_processor_name = "BindValueProcessor",
     processor_lib_dep = ":bind_value_processor_lib",
 )
 
@@ -36,7 +36,7 @@ java_library(
         "KspBindValueProcessor.java",
     ],
     deps = [
-        "//dagger-compiler/main/java/dagger/internal/codegen/xprocessing",
+        "//dagger-compiler:xprocessing",
         "//dagger-spi",
         "//hilt-compiler/main/java/dagger/hilt/processor/internal:base_processor",
         "//hilt-compiler/main/java/dagger/hilt/processor/internal:classnames",

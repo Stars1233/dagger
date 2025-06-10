@@ -14,15 +14,21 @@
  * limitations under the License.
  */
 
-package dagger.internal.codegen.langmodel;
+package dagger.internal.codegen;
 
 import static com.google.common.truth.Truth.assertThat;
-import static dagger.internal.codegen.langmodel.Accessibility.isElementAccessibleFrom;
+import static dagger.internal.codegen.extension.DaggerCollectors.onlyElement;
+import static dagger.internal.codegen.xprocessing.Accessibility.isElementAccessibleFrom;
+import static dagger.internal.codegen.xprocessing.XElements.getSimpleName;
 
+import androidx.room.compiler.processing.XElement;
+import androidx.room.compiler.processing.XProcessingEnv;
+import androidx.room.compiler.processing.XTypeElement;
 import com.google.testing.compile.CompilationRule;
-import javax.lang.model.element.Element;
-import javax.lang.model.element.TypeElement;
-import javax.lang.model.util.Elements;
+import dagger.Component;
+import dagger.internal.codegen.javac.JavacPluginModule;
+import javax.inject.Inject;
+import javax.inject.Singleton;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -56,12 +62,19 @@ public class AccessibilityTest {
   @Rule
   public final CompilationRule compilationRule = new CompilationRule();
 
-  private TypeElement testElement;
+  @Inject
+  XProcessingEnv processingEnv;
+
+  private XTypeElement testElement;
 
   @Before
   public void setUp() {
-    Elements elements = compilationRule.getElements();
-    testElement = elements.getTypeElement(AccessibilityTest.class.getCanonicalName());
+    DaggerAccessibilityTest_TestComponent.builder()
+        .javacPluginModule(
+            new JavacPluginModule(compilationRule.getElements(), compilationRule.getTypes()))
+        .build()
+        .inject(this);
+    testElement = processingEnv.requireTypeElement(AccessibilityTest.class.getCanonicalName());
   }
 
   @Test
@@ -71,65 +84,68 @@ public class AccessibilityTest {
 
   @Test
   public void isElementAccessibleFrom_publicMethod() {
-    Element member = getMemberNamed("publicMethod");
+    XElement member = getMemberNamed("publicMethod");
     assertThat(isElementAccessibleFrom(member, "literally.anything")).isTrue();
   }
 
   @Test
   public void isElementAccessibleFrom_protectedMethod() {
-    Element member = getMemberNamed("protectedMethod");
+    XElement member = getMemberNamed("protectedMethod");
     assertThat(isElementAccessibleFrom(member, "dagger.internal.codegen")).isTrue();
     assertThat(isElementAccessibleFrom(member, "not.dagger.internal.codegen")).isFalse();
   }
 
   @Test
   public void isElementAccessibleFrom_packagePrivateMethod() {
-    Element member = getMemberNamed("packagePrivateMethod");
+    XElement member = getMemberNamed("packagePrivateMethod");
     assertThat(isElementAccessibleFrom(member, "dagger.internal.codegen")).isTrue();
     assertThat(isElementAccessibleFrom(member, "not.dagger.internal.codegen")).isFalse();
   }
 
   @Test
   public void isElementAccessibleFrom_privateMethod() {
-    Element member = getMemberNamed( "privateMethod");
+    XElement member = getMemberNamed("privateMethod");
     assertThat(isElementAccessibleFrom(member, "dagger.internal.codegen")).isFalse();
     assertThat(isElementAccessibleFrom(member, "not.dagger.internal.codegen")).isFalse();
   }
 
   @Test
   public void isElementAccessibleFrom_publicField() {
-    Element member = getMemberNamed("publicField");
+    XElement member = getMemberNamed("publicField");
     assertThat(isElementAccessibleFrom(member, "literally.anything")).isTrue();
   }
 
   @Test
   public void isElementAccessibleFrom_protectedField() {
-    Element member = getMemberNamed("protectedField");
+    XElement member = getMemberNamed("protectedField");
     assertThat(isElementAccessibleFrom(member, "dagger.internal.codegen")).isTrue();
     assertThat(isElementAccessibleFrom(member, "not.dagger.internal.codegen")).isFalse();
   }
 
   @Test
   public void isElementAccessibleFrom_packagePrivateField() {
-    Element member = getMemberNamed("packagePrivateField");
+    XElement member = getMemberNamed("packagePrivateField");
     assertThat(isElementAccessibleFrom(member, "dagger.internal.codegen")).isTrue();
     assertThat(isElementAccessibleFrom(member, "not.dagger.internal.codegen")).isFalse();
   }
 
   @Test
   public void isElementAccessibleFrom_privateField() {
-    Element member = getMemberNamed("privateField");
+    XElement member = getMemberNamed("privateField");
     assertThat(isElementAccessibleFrom(member, "dagger.internal.codegen")).isFalse();
     assertThat(isElementAccessibleFrom(member, "not.dagger.internal.codegen")).isFalse();
   }
 
-  private Element getMemberNamed(String memberName) {
-    for (Element enclosedElement : testElement.getEnclosedElements()) {
-      if (enclosedElement.getSimpleName().contentEquals(memberName)) {
-        return enclosedElement;
-      }
-    }
-    throw new IllegalArgumentException();
+  private XElement getMemberNamed(String memberName) {
+    return testElement.getEnclosedElements().stream()
+        .filter(element -> getSimpleName(element).contentEquals(memberName))
+        .collect(onlyElement());
+  }
+
+  @Singleton
+  @Component(modules = JavacPluginModule.class)
+  interface TestComponent {
+    void inject(AccessibilityTest test);
   }
 }
 

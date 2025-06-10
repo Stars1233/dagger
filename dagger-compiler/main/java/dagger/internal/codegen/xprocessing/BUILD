@@ -18,13 +18,14 @@
 load("@rules_java//java:defs.bzl", "java_import", "java_library")
 load("//tools:bazel_compat.bzl", "compat_kt_jvm_library")
 
-package(default_visibility = ["//:src"])
+package(default_visibility = ["//dagger-compiler:internal"])
 
 XPOET_SRCS = [
     "NullableTypeNames.java",
     "XAnnotationSpecs.java",
     "XCodeBlocks.java",
     "XExpression.java",
+    "XExpressionType.java",
     "XFunSpecs.java",
     "XParameterSpecs.java",
     "XPropertySpecs.java",

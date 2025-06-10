@@ -23,7 +23,7 @@ package(default_visibility = ["//:src"])
 compat_processor_plugin(
     name = "processor",
     generates_api = 1,
-    processor_base_name = "DisableInstallInCheck",
+    javac_processor_name = "DisableInstallInCheckProcessor",
     processor_lib_dep = ":processor_lib",
     visibility = [
         "//hilt-core/main/java/dagger/hilt/migration:__pkg__",
@@ -38,7 +38,7 @@ java_library(
         "KspDisableInstallInCheckProcessor.java",
     ],
     deps = [
-        "//dagger-compiler/main/java/dagger/internal/codegen/xprocessing",
+        "//dagger-compiler:xprocessing",
         "//hilt-compiler/main/java/dagger/hilt/processor/internal:base_processor",
         "//hilt-compiler/main/java/dagger/hilt/processor/internal:classnames",
         "//hilt-compiler/main/java/dagger/hilt/processor/internal:processor_errors",

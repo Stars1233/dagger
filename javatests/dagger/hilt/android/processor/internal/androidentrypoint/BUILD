@@ -45,10 +45,12 @@ compiler_test(
         "//third_party/java/android/android_sdk_linux:android_runtime",
     ],
     deps = [
-        "//dagger-compiler/main/java/dagger/internal/codegen/xprocessing",
+        "//dagger-compiler:xprocessing",
         "//dagger-compiler/main/java/dagger/internal/codegen/xprocessing:xprocessing-testing",
         "//hilt-android-testing/main/java/dagger/hilt/android/testing/compile",
+        "//hilt-compiler/main/java/dagger/hilt/processor/internal:base_processor",
         "//third_party/java/guava/collect",
+        "//third_party/java/javapoet",
         "//third_party/java/junit",
     ],
 )

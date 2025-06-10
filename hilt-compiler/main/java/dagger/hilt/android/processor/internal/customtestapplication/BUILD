@@ -23,7 +23,7 @@ package(default_visibility = ["//:src"])
 compat_processor_plugin(
     name = "processor",
     generates_api = 1,
-    processor_base_name = "CustomTestApplication",
+    javac_processor_name = "CustomTestApplicationProcessor",
     processor_lib_dep = ":processor_lib",
 )
 
@@ -37,7 +37,7 @@ java_library(
         "KspCustomTestApplicationProcessor.java",
     ],
     deps = [
-        "//dagger-compiler/main/java/dagger/internal/codegen/xprocessing",
+        "//dagger-compiler:xprocessing",
         "//dagger-spi",
         "//hilt-compiler/main/java/dagger/hilt/processor/internal:base_processor",
         "//hilt-compiler/main/java/dagger/hilt/processor/internal:classnames",
